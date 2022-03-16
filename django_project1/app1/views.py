@@ -27,10 +27,10 @@ def func5(request):
     return response(a)
 
 def template1(request):
-    return render(request,'template_1.html')
+    return render(request,'app1_templates/template_1.html')
 
 def template2(request):
-    return render(request,'template_2.html')
+    return render(request,'app2_templates/template_2.html')
 
 def template3(request):
-    return render(request,'template_3.html')
+    return render(request,'app3_templates/template_3.html')
