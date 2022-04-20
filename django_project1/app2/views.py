@@ -25,3 +25,14 @@ def func4(request):
 def func5(request):
     a = '<h1>This is Function 5 From app2 </h1>'
     return response(a)
+
+def template2(request):
+    bio_details = {
+        'name':'Sriram',
+        'city':'Surat',
+        'profession':'Python developer',
+        'hobby1':'Reading books',
+        'hobby2':'Listening Music',
+        'hobby3':'Travelling',
+    }
+    return render(request,'app2_templates/template_2.html',bio_details)

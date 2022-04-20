@@ -3,7 +3,7 @@ from django.http import HttpResponse as response
 
 # Create your views here.
 def home(request):
-    return render(request,'home.html')
+    return render(request,'project_templates/home.html')
     
 def func1(request):
     a = 'This is Function 1 From app1'
@@ -28,16 +28,3 @@ def func5(request):
 def template1(request):
     return render(request,'app1_templates/template_1.html')
 
-def template2(request):
-    bio_details = {
-        'name':'Sriram',
-        'city':'Surat',
-        'profession':'Python developer',
-        'hobby1':'Reading books',
-        'hobby2':'Listening Music',
-        'hobby3':'Travelling',
-    }
-    return render(request,'app2_templates/template_2.html',bio_details)
-
-def template3(request):
-    return render(request,'app3_templates/template_3.html')

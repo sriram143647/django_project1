@@ -25,3 +25,6 @@ def func4(request):
 def func5(request):
     a = '<h1>This is Function 5 From app3 </h1>'
     return response(a)
+
+def template3(request):
+    return render(request,'app3_templates/template_3.html')

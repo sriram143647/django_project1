@@ -24,6 +24,4 @@ urlpatterns = [
     path('func4/',views.func4),
     path('func5/',views.func5),
     path('temp1/',views.template1),
-    path('temp2/',views.template2),
-    path('temp3/',views.template3),
 ]

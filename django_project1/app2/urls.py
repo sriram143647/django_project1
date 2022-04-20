@@ -23,4 +23,5 @@ urlpatterns = [
     path('func3/',views.func3),
     path('func4/',views.func4),
     path('func5/',views.func5),
+    path('temp2/',views.template2),
 ]
