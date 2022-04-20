@@ -1,10 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse as response
 
-# Create your views here.
-def home(request):
-    return render(request,'project_templates/home.html')
-    
+# Create your views here. 
 def func1(request):
     a = 'This is Function 1 From app1'
     return response(a)
@@ -27,4 +24,3 @@ def func5(request):
 
 def template1(request):
     return render(request,'app1_templates/template_1.html')
-
