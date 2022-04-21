@@ -24,3 +24,18 @@ def func5(request):
 
 def template1(request):
     return render(request,'app1_templates/template_1.html')
+
+def app1_proj_index(request):
+    return render(request,'app1_proj_templates/index.html')
+
+def app1_proj_about(request):
+    return render(request,'app1_proj_templates/about.html')
+
+def app1_proj_clients(request):
+    return render(request,'app1_proj_templates/clients.html')
+
+def app1_proj_contact(request):
+    return render(request,'app1_proj_templates/contact.html')
+
+def app1_proj_ourwork(request):
+    return render(request,'app1_proj_templates/ourwork.html')

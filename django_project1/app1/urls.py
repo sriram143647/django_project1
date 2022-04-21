@@ -24,4 +24,9 @@ urlpatterns = [
     path('func4/',views.func4),
     path('func5/',views.func5),
     path('temp1/',views.template1),
+    path('proj/index/',views.app1_proj_index),
+    path('proj/about/',views.app1_proj_about),
+    path('proj/clients/',views.app1_proj_clients),
+    path('proj/contact/',views.app1_proj_contact),
+    path('proj/ourwork/',views.app1_proj_ourwork),
 ]

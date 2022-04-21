@@ -36,3 +36,27 @@ def template2(request):
         'hobby3':'Travelling',
     }
     return render(request,'app2_templates/template_2.html',bio_details)
+
+def app2_proj_about(request):
+    return render(request,'app2_proj_templates/about.html')
+
+def app2_proj_blog(request):
+    return render(request,'app2_proj_templates/blog.html')
+
+def app2_proj_class(request):
+    return render(request,'app2_proj_templates/class.html')
+
+def app2_proj_contact(request):
+    return render(request,'app2_proj_templates/contact.html')
+
+def app2_proj_gallery(request):
+    return render(request,'app2_proj_templates/gallery.html')
+
+def app2_proj_index(request):
+    return render(request,'app2_proj_templates/index.html')
+
+def app2_proj_single(request):
+    return render(request,'app2_proj_templates/single.html')
+
+def app2_proj_team(request):
+    return render(request,'app2_proj_templates/team.html')
