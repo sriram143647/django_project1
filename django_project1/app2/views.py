@@ -34,6 +34,7 @@ def template2(request):
         'hobby1':'Reading books',
         'hobby2':'Listening Music',
         'hobby3':'Travelling',
+        'app2_temp':'/app2/temp2/',
     }
     return render(request,'app2_templates/template_2.html',bio_details)
 
