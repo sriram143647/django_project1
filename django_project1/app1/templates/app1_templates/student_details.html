@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Student Info</title>
+        <style>
+            th,td{
+                border: 1px black solid;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Student Info</h1>
+        {% if stud_details %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Student Mail</th>
+                <th>Student Phone</th>
+                <th>Student Info</th>
+            </tr>
+            {% for st in stud_details %}
+            <tr>
+                <td>{{st.id}}</td>
+                <td>{{st.std_id}}</td>
+                <td>{{st.std_name}}</td>
+                <td>{{st.std_mail}}</td>
+                <td>{{st.std_phone}}</td>
+                <td>{{st.std_info}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% comment %} <h3>{{stud_details}}</h3> {% endcomment %}
+
+        {% else %}
+        <h3>No Data Available</h3>
+        {% endif %}
+    </body>
+</html>

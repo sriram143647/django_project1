@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse as response
+from app1.models import student_data
 
 # Create your views here. 
 def func1(request):
@@ -23,7 +24,7 @@ def func5(request):
     return response(a)
 
 def template1(request):
-    return render(request,'app1_templates/template_1.html',{'app1_temp':'/app1/temp1/'})
+    return render(request,'app1_templates/template_1.html')
 
 def app1_proj_index(request):
     return render(request,'app1_proj_templates/index.html')
@@ -39,3 +40,7 @@ def app1_proj_contact(request):
 
 def app1_proj_ourwork(request):
     return render(request,'app1_proj_templates/ourwork.html')
+
+def student_detail(request):
+    std_details = student_data.objects.all()
+    return render(request,'app1_templates/student_details.html',{'stud_details':std_details})

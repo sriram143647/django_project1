@@ -8,20 +8,12 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "pythonpath":"C:\\Users\\011\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+            "python":"C:\\Users\\011\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
             "program": "${workspaceFolder}\\manage.py",
             "args": [
                 "runserver",
-                "--noreload",
-                "--nothreading"
             ],
             "env":{},
-            "debugOptions":[
-                "WaitOnAbnormalExit",
-                "WaitOnNormalExit",
-                "RedirectOutput",
-                "DajngoDebugging"
-            ],
             "django": true,
             "justMyCode": true
         }
