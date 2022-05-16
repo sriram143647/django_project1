@@ -32,4 +32,5 @@ urlpatterns = [
     path('proj/index/',views.app2_proj_index),
     path('proj/single/',views.app2_proj_single),
     path('proj/team/',views.app2_proj_team),
+    path('register/',views.std_register_form),
 ]
