@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse as response
+from django.http import HttpResponseRedirect as redirect
 from requests import request
 from app2.forms import std_register
 
@@ -32,11 +33,12 @@ def template2(request):
     bio_details = {
         'name':'Sriram',
         'city':'Surat',
-        'profession':'Python developer',
         'hobby1':'Reading books',
         'hobby2':'Listening Music',
         'hobby3':'Travelling',
-        'app2_temp':'/app2/temp2/',
+        'id':'',
+        'mail_id':'',
+        'phone':'',
     }
     return render(request,'app2_templates/template_2.html',bio_details)
 
@@ -66,9 +68,29 @@ def app2_proj_team(request):
 
 def std_register_form(request):
     initial_val_dict = {
-        'std_name':'Enter student Name',
-        'std_mail':'Enter student Mail',
+        'std_name':'Enter Name',
+        'std_mail':'Enter Mail-id',
     }
+    if request.method == 'POST':
+        std_frm = std_register(request.POST,auto_id=True,label_suffix='',initial=initial_val_dict)
+        if std_frm.is_valid():
+            name = std_frm.cleaned_data['std_name']
+            id = std_frm.cleaned_data['std_id']
+            phone = std_frm.cleaned_data['std_phone']
+            mail = std_frm.cleaned_data['std_mail']
+            bio_details = {
+                'name':name,
+                'city':'Surat',
+                'hobby1':'Reading books',
+                'hobby2':'Listening Music',
+                'hobby3':'Travelling',
+                'id':id,
+                'mail_id':mail,
+                'phone':phone,
+            }
+            return render(request,'app2_templates/template_2.html',bio_details)
+    else:
+        std_frm = std_register(auto_id=True,label_suffix='',initial=initial_val_dict)
     std_frm = std_register(auto_id=True,label_suffix='',initial=initial_val_dict)
     std_frm.order_fields(field_order=['std_id','std_name','std_mail','std_phone'])
     return render(request,'app2_templates/student_register_form.html',{'std_form':std_frm})

@@ -4,18 +4,39 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Student Registration Form</title>
         <style>
-            th,td{
-                border: 1px black solid;
-            }
+            th,td{border: 1px black solid;}
         </style>
     </head>
     <body>
         <h1>Student Info</h1>
-        <form action='' method='get'>
-            <table>
-                {{std_form}}
-            </table>
-            <input type='submit' value='submit'>
+        {% comment %} <form action='' method='GET'> {% endcomment %}
+        <form action='' method='POST'>
+            {% csrf_token %}
+            {% for field in std_form.visible_fields %}
+                {{field.label_tag}}
+                {{field}}<br/>
+            {% endfor %}
+            <input type="submit" value="Submit">
+            {% comment %} {% for field in std_form.hidden_fields %}
+                {{field.label_tag}}
+                {{field}}<br/>
+            {% endfor %} {% endcomment %}
+            {% comment %} <div>
+                {{std_form.std_id.label_tag}}
+                {{std_form.std_id}}
+            </div>
+            <div>
+                {{std_form.std_name.label_tag}}
+                {{std_form.std_name}}
+            </div>
+            <div>
+                {{std_form.std_mail.label_tag}}
+                {{std_form.std_mail}}
+            </div>
+            <div>
+                {{std_form.std_phone.label_tag}}
+                {{std_form.std_phone}}
+            </div> {% endcomment %}
         </form>
     </body>
 </html>
