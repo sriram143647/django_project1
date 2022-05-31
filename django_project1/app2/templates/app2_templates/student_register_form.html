@@ -8,15 +8,23 @@
         </style>
     </head>
     <body>
+        <a href="/">HOME</a>
         <h1>Student Info</h1>
         {% comment %} <form action='' method='GET'> {% endcomment %}
-        <form action='' method='POST'>
+        <form action='' method='POST' novalidate>
             {% csrf_token %}
+            {% if std_form.errors %}
+                {% for field in std_form.visible_fields %}            
+                    {% for error in field.errors %}
+                        <p> {{ error }} </p>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            
             {% for field in std_form.visible_fields %}
                 {{field.label_tag}}
                 {{field}}<br/>
             {% endfor %}
-            <input type="submit" value="Submit">
             {% comment %} {% for field in std_form.hidden_fields %}
                 {{field.label_tag}}
                 {{field}}<br/>
@@ -37,6 +45,7 @@
                 {{std_form.std_phone.label_tag}}
                 {{std_form.std_phone}}
             </div> {% endcomment %}
+            <input type="submit" value="Submit">
         </form>
     </body>
 </html>

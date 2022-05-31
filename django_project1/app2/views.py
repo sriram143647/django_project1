@@ -67,12 +67,13 @@ def app2_proj_team(request):
     return render(request,'app2_proj_templates/team.html')
 
 def std_register_form(request):
-    initial_val_dict = {
-        'std_name':'Enter Name',
-        'std_mail':'Enter Mail-id',
-    }
+    # initial_val_dict = {
+    #     'std_name':'Enter Name',
+    #     'std_mail':'Enter Mail-id',
+    # }
     if request.method == 'POST':
-        std_frm = std_register(request.POST,auto_id=True,label_suffix='',initial=initial_val_dict)
+        # std_frm = std_register(request.POST,auto_id=True,label_suffix='',initial=initial_val_dict)
+        std_frm = std_register(request.POST,auto_id=True,label_suffix='')
         if std_frm.is_valid():
             name = std_frm.cleaned_data['std_name']
             id = std_frm.cleaned_data['std_id']
@@ -90,7 +91,7 @@ def std_register_form(request):
             }
             return render(request,'app2_templates/template_2.html',bio_details)
     else:
-        std_frm = std_register(auto_id=True,label_suffix='',initial=initial_val_dict)
-    std_frm = std_register(auto_id=True,label_suffix='',initial=initial_val_dict)
+        # std_frm = std_register(auto_id=True,label_suffix='',initial=initial_val_dict)
+        std_frm = std_register(auto_id=True,label_suffix='')
     std_frm.order_fields(field_order=['std_id','std_name','std_mail','std_phone'])
     return render(request,'app2_templates/student_register_form.html',{'std_form':std_frm})
