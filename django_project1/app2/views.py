@@ -3,6 +3,7 @@ from django.http import HttpResponse as response
 from django.http import HttpResponseRedirect as redirect
 from requests import request
 from app2.forms import std_register
+from app1.models import student_data
 
 # Create your views here.
 def home(request):
@@ -66,6 +67,10 @@ def app2_proj_single(request):
 def app2_proj_team(request):
     return render(request,'app2_proj_templates/team.html')
 
+def student_detail(request):
+    std_details = student_data.objects.all()
+    return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
+
 def std_register_form(request):
     # initial_val_dict = {
     #     'std_name':'Enter Name',
@@ -79,17 +84,21 @@ def std_register_form(request):
             id = std_frm.cleaned_data['std_id']
             phone = std_frm.cleaned_data['std_phone']
             mail = std_frm.cleaned_data['std_mail']
-            bio_details = {
-                'name':name,
-                'city':'Surat',
-                'hobby1':'Reading books',
-                'hobby2':'Listening Music',
-                'hobby3':'Travelling',
-                'id':id,
-                'mail_id':mail,
-                'phone':phone,
-            }
-            return render(request,'app2_templates/template_2.html',bio_details)
+            std_ins = student_data(std_name = name,std_id = id,std_phone=phone,std_mail=mail)
+            std_ins.save()
+            std_details = student_data.objects.all()
+            return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
+            # bio_details = {
+            #     'name':name,
+            #     'city':'Surat',
+            #     'hobby1':'Reading books',
+            #     'hobby2':'Listening Music',
+            #     'hobby3':'Travelling',
+            #     'id':id,
+            #     'mail_id':mail,
+            #     'phone':phone,
+            # }
+            # return render(request,'app2_templates/template_2.html',bio_details)
     else:
         # std_frm = std_register(auto_id=True,label_suffix='',initial=initial_val_dict)
         std_frm = std_register(auto_id=True,label_suffix='')
