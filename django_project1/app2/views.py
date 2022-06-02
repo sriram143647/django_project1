@@ -68,9 +68,9 @@ def app2_proj_single(request):
 def app2_proj_team(request):
     return render(request,'app2_proj_templates/team.html')
 
-def student_detail(request):
-    std_details = student_data.objects.all()
-    return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
+# def student_detail(request):
+#     std_details = student_data.objects.all()
+#     return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
 
 def std_register_form(request):
     # initial_val_dict = {
