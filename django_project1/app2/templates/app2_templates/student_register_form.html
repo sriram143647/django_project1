@@ -4,7 +4,15 @@
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Student Registration Form</title>
         <style>
-            th,td{border: 1px black solid;}
+            th,td {border: 1px black solid;}
+            .errorlist:after {
+                list-style-type: None;
+                color:red;
+            }
+            .star:after {
+                content:" *";
+                color: red;
+              }
         </style>
     </head>
     <body>
@@ -14,15 +22,16 @@
         <form action='' method='POST' novalidate>
             {% csrf_token %}
             {% if std_form.errors %}
-                {% for field in std_form.visible_fields %}            
+                {% for field in std_form.visible_fields %}
                     {% for error in field.errors %}
-                        <p> {{ error }} </p>
+                        <p class='errorlist'> {{ error }} </p>
+                        {{break}}
                     {% endfor %}
                 {% endfor %}
             {% endif %}
             
             {% for field in std_form.visible_fields %}
-                {{field.label_tag}}
+                <label class='star'> {{field.label_tag}} </label> <br/>
                 {{field}}<br/>
             {% endfor %}
             {% comment %} {% for field in std_form.hidden_fields %}

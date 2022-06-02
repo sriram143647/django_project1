@@ -9,4 +9,4 @@ class student_data(models.Model):
     std_phone = models.CharField(max_length=10)
     
     def __str__(self):
-        return self.std_name
+            return self.std_name

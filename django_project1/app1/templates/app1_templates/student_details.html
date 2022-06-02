@@ -11,6 +11,10 @@
     </head>
     <body>
         <h1>Student Info</h1>
+        {% for msg in messages %}
+            {{msg}}
+        {% endfor %}
+        
         {% if stud_details %}
         <table>
             <tr>
@@ -31,7 +35,6 @@
             {% endfor %}
         </table>
         {% comment %} <h3>{{stud_details}}</h3> {% endcomment %}
-
         {% else %}
         <h3>No Data Available</h3>
         {% endif %}

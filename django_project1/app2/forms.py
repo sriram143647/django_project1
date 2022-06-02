@@ -11,8 +11,8 @@ class std_register(forms.Form):
     std_name_error_dict= {'required':'Name is mandatory field','max_length':'Name is too long','min_length':'Name is too short'}
 
     std_phone = forms.CharField(label='Phone No',min_length=10,max_length=15,error_messages=std_phone_error_dict)
-    std_id = forms.IntegerField(label='ID')
-    std_mail = forms.EmailField(label='E-Mail')
+    std_id = forms.IntegerField(label='ID',error_messages={'required':'ID is a mandatory field'})
+    std_mail = forms.EmailField(label='E-Mail',error_messages={'required':'E-mail is a mandatory field'})
     std_name = forms.CharField(label='Name',strip=True,error_messages=std_name_error_dict,validators=[validators.MaxLengthValidator(10),validators.MinLengthValidator(5),check_name])
       
     # custom validator using 'clean'

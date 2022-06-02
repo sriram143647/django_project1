@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.http import HttpResponse as response
 from django.http import HttpResponseRedirect as redirect
 from requests import request
@@ -80,14 +81,22 @@ def std_register_form(request):
         # std_frm = std_register(request.POST,auto_id=True,label_suffix='',initial=initial_val_dict)
         std_frm = std_register(request.POST,auto_id=True,label_suffix='')
         if std_frm.is_valid():
-            name = std_frm.cleaned_data['std_name']
-            id = std_frm.cleaned_data['std_id']
-            phone = std_frm.cleaned_data['std_phone']
-            mail = std_frm.cleaned_data['std_mail']
-            std_ins = student_data(std_name = name,std_id = id,std_phone=phone,std_mail=mail)
-            std_ins.save()
+            ins_name = std_frm.cleaned_data['std_name']
+            ins_id = std_frm.cleaned_data['std_id']
+            ins_phone = std_frm.cleaned_data['std_phone']
+            ins_mail = std_frm.cleaned_data['std_mail']
             std_details = student_data.objects.all()
-            return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
+            for std in std_details:
+                if ins_id == std.std_id:
+                    std_ins = student_data(id=std.id,std_name = ins_name,std_id = ins_id,std_phone = ins_phone,std_mail = ins_mail)
+                    std_ins.save()
+                    messages.success(request, 'Record updated successfully')
+                    return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
+            else:
+                std_ins = student_data(id=std.id,std_name = ins_name,std_id = ins_id,std_phone = ins_phone,std_mail = ins_mail)
+                std_ins.save()
+                messages.success(request, 'New Record inserted successfully')
+                return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
             # bio_details = {
             #     'name':name,
             #     'city':'Surat',
