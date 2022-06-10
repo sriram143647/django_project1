@@ -41,6 +41,25 @@ def app1_proj_contact(request):
 def app1_proj_ourwork(request):
     return render(request,'app1_proj_templates/ourwork.html')
 
+def show_data(request,my_id=0):
+    std_detail = student_data.objects.all()
+    for std in std_detail:
+        if std.std_id == my_id:
+            name = std.std_name
+            mail = std.std_mail
+            phone = std.std_phone
+            bio_details = {
+            'name':name,
+            'city':'Surat',
+            'hobby1':'Reading books',
+            'hobby2':'Listening Music',
+            'hobby3':'Travelling',
+            'id':my_id,
+            'mail_id':mail,
+            'phone':phone,
+            }
+            return render(request,'app2_templates/template_2.html',bio_details)
+
 def student_detail(request):
     std_details = student_data.objects.all()
     return render(request,'app1_templates/student_details.html',{'stud_details':std_details})

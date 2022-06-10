@@ -29,5 +29,6 @@ urlpatterns = [
     path('proj/clients/',views.app1_proj_clients),
     path('proj/contact/',views.app1_proj_contact),
     path('proj/ourwork/',views.app1_proj_ourwork),
-    path('stud/',views.student_detail)
+    path('stud/',views.student_detail),
+    path('stud/<int:my_id>/',views.show_data,name='std_detail')
 ]

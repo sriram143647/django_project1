@@ -33,4 +33,5 @@ urlpatterns = [
     path('proj/single/',views.app2_proj_single),
     path('proj/team/',views.app2_proj_team),
     path('register/',views.std_register_form),
+    path('view_data/',views.student_detail,name='detail'),
 ]

@@ -68,9 +68,9 @@ def app2_proj_single(request):
 def app2_proj_team(request):
     return render(request,'app2_proj_templates/team.html')
 
-# def student_detail(request):
-#     std_details = student_data.objects.all()
-#     return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
+def student_detail(request):
+    std_details = student_data.objects.all()
+    return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
 
 def std_register_form(request):
     # initial_val_dict = {
@@ -90,13 +90,14 @@ def std_register_form(request):
                 if ins_id == std.std_id:
                     std_ins = student_data(id=std.id,std_name = ins_name,std_id = ins_id,std_phone = ins_phone,std_mail = ins_mail)
                     std_ins.save()
-                    messages.success(request, 'Record updated successfully')
-                    return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
+                    messages.success(request, f'Record {ins_id} updated successfully')
+                    return redirect('/app2/view_data/')
             else:
                 std_ins = student_data(id=std.id,std_name = ins_name,std_id = ins_id,std_phone = ins_phone,std_mail = ins_mail)
                 std_ins.save()
-                messages.success(request, 'New Record inserted successfully')
-                return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
+                messages.success(request, f'New Record {ins_id} inserted successfully')
+                return redirect('/app2/view_data/')
+            # return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
             # bio_details = {
             #     'name':name,
             #     'city':'Surat',
