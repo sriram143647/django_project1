@@ -1,0 +1,55 @@
+{% extends 'crud/base.html' %}
+{% block content %}
+<div class="container">
+    <div class='row'>
+        <div class='col-sm-4'>
+            <h4 class='text-center alert alert-info'>Add New Student Data</h4>
+            <h5>New Data</h5>
+            <form action="" method='POST'>
+                {% csrf_token %}
+                <div class='container'>
+                    {% for field in std_form.visible_fields %}
+                        <label> {{field.label_tag}} </label> <br/>
+                        {{field}}<br/>
+                    {% endfor %}
+                    <br/>
+                    <input type='submit' class='btn btn-success' value='Add'>
+                </div>
+            </form>
+        </div>
+        
+        <div class='col-sm-8'>
+            <h4 class='text-center alert alert-info'>Student Data</h4>
+            {% if stud_details %}
+            <h5>Table Data</h5>
+            <table class='container table table-striped'>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Student Mail</th>
+                    <th>Student Phone</th>
+                    <th>Action</th>
+                </tr>
+                {% for st in stud_details %}
+                <tr>
+                    <td>{{st.std_id}}</td>
+                    <td>{{st.std_name}}</td>
+                    <td>{{st.std_mail}}</td>
+                    <td>{{st.std_phone}}</td>
+                    <td>
+                        <a href="{% url 'updatedata' st.id %}" class='btn btn-warning'>Edit</a>
+                        <form action="{% url 'deldata' st.id %}" method='POST' class='d-inline'>
+                            {% csrf_token %}
+                            <input type='submit' class='btn btn-danger' value='Delete'>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+                <h4 class='container mt-5 alert alert-warning'>No Data Available</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content%}
