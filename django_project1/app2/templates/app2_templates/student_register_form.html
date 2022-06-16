@@ -10,7 +10,7 @@
                 color:red;
             }
             .star:after {
-                content:" *";
+                content:"* ";
                 color: red;
               }
         </style>
@@ -29,30 +29,68 @@
                 {% endfor %}
             {% endif %}
             
-            {% for field in std_form.visible_fields %}
-                <label class='star'> {{field.label_tag}} </label> <br/>
-                {{field}}<br/>
-            {% endfor %}
+            {% comment %} <table>
+                {% for field in std_form.visible_fields %}
+                    <tr> 
+                        <td><label class='star'> {{field.label_tag}} </label></td>
+                        <td>{{field}}<br/> </td>
+                    </tr>
+                {% endfor %}
+            </table> {% endcomment %}
             {% comment %} {% for field in std_form.hidden_fields %}
                 {{field.label_tag}}
                 {{field}}<br/>
             {% endfor %} {% endcomment %}
-            {% comment %} <div>
-                {{std_form.std_id.label_tag}}
-                {{std_form.std_id}}
-            </div>
-            <div>
-                {{std_form.std_name.label_tag}}
-                {{std_form.std_name}}
-            </div>
-            <div>
-                {{std_form.std_mail.label_tag}}
-                {{std_form.std_mail}}
-            </div>
-            <div>
-                {{std_form.std_phone.label_tag}}
-                {{std_form.std_phone}}
-            </div> {% endcomment %}
+            <table>
+                <tr>
+                    <td><label class='star'>{{std_form.uid.label_tag}}</label></td>
+                    <td>{{std_form.uid}}
+                </tr>
+                <tr>
+                    <td><label class='star'>{{std_form.name.label_tag}}</label></td>
+                    <td>{{std_form.name}}
+                </tr>
+                <tr>
+                    <td><label class='star'>{{std_form.add1.label_tag}}</label></td>
+                    <td>{{std_form.add1}}
+                </tr>
+                <tr>
+                    <td>{{std_form.add2.label_tag}}</label></td>
+                    <td>{{std_form.add2}}
+                </tr>
+                <tr>
+                    <td><label class='star'>{{std_form.city.label_tag}}</label></td>
+                    <td>{{std_form.city}}
+                </tr>
+                <tr>
+                    <td><label class='star'>{{std_form.mail.label_tag}}</label></td>
+                    <td>{{std_form.mail}}
+                </tr>
+                <tr>
+                    <td><label class='star'>{{std_form.phone.label_tag}}</label></td>
+                    <td>{{std_form.phone}}
+                </tr>
+                <tr>
+                    <td><label class='star'>{{std_form.gender.label_tag}}</label></td>
+                    <td>{{std_form.gender}}
+                </tr>
+                <tr>
+                    <td>Hobbies: </td>
+                    <td>
+                    {{std_form.hobby1}}
+                    {{std_form.hobby1.label_tag}}
+                    {{std_form.hobby2}}
+                    {{std_form.hobby2.label_tag}}
+                    {{std_form.hobby3}}
+                    {{std_form.hobby3.label_tag}}
+                    {{std_form.hobby4}}
+                    {{std_form.hobby4.label_tag}}
+                    {{std_form.hobby5}}
+                    {{std_form.hobby5.label_tag}}
+                    </td>
+                </tr>
+            </table>
+            <br/>
             <input type="submit" value="Submit">
         </form>
     </body>

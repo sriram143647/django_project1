@@ -44,20 +44,28 @@ def app1_proj_ourwork(request):
 def show_data(request,my_id=0):
     std_detail = student_data.objects.all()
     for std in std_detail:
-        if std.std_id == my_id:
-            name = std.std_name
-            mail = std.std_mail
-            phone = std.std_phone
+        hby_list = []
+        if std.hobby1 == True:
+            hby_list.append('Reading Books')
+        if std.hobby2 == True:
+            hby_list.append('Travelling')
+        if std.hobby3 == True:
+            hby_list.append('Listening Music')
+        if std.hobby4 == True:
+            hby_list.append('Coding')
+        if std.hobby5 == True:
+            hby_list.append('Sports')
+        if std.uid == my_id:
             bio_details = {
-            'name':name,
-            'city':'Surat',
-            'hobby1':'Reading books',
-            'hobby2':'Listening Music',
-            'hobby3':'Travelling',
+            'name':std.name,
+            'city':std.city,
+            'hobby1':hby_list[0],
+            'hobby2':hby_list[1],
+            'hobby3':hby_list[2],
             'id':my_id,
-            'mail_id':mail,
-            'phone':phone,
-            }
+            'mail_id':std.mail,
+            'phone':std.phone,
+            }       
             return render(request,'app2_templates/template_2.html',bio_details)
 
 def student_detail(request):

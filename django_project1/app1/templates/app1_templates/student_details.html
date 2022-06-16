@@ -19,23 +19,31 @@
         <table>
             <tr>
                 <th>ID</th>
-                <th>Student ID</th>
-                <th>Student Name</th>
-                <th>Student Mail</th>
-                <th>Student Phone</th>
-                <th>Student Link</th>
+                <th>Name</th>
+                <th>Mail</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Address1</th>
+                <th>Address2</th>
+                <th>City</th>
+                <th>Link</th>
             </tr>
             {% for st in stud_details %}
             <tr>
-                <td>{{st.id}}</td>
-                <td>{{st.std_id}}</td>
-                <td>{{st.std_name}}</td>
-                <td>{{st.std_mail}}</td>
-                <td>{{st.std_phone}}</td>
-                <td><a href="{% url 'std_detail' st.std_id %}">view data</a></td>
+                <td>{{st.uid}}</td>
+                <td>{{st.name}}</td>
+                <td>{{st.mail}}</td>
+                <td>{{st.phone}}</td>
+                <td>{{st.gender}}</td>
+                <td>{{st.add1}}</td>
+                <td>{{st.add2}}</td>
+                <td>{{st.city}}</td>
+                <td><a href="{% url 'std_detail' st.uid %}">view data</a></td>
             </tr>
             {% endfor %}
         </table>
+        <br>
+        <a href="/app2/register/">Register New Student</a>
         {% else %}
             <h3>No Data Available</h3>
         {% endif %}

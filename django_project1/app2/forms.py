@@ -11,19 +11,39 @@ def check_name(val):
 class std_register(forms.ModelForm):
     class Meta:
         model = student_data
-        fields = ("std_id","std_name","std_mail","std_phone")
-        labels = {'std_id':'ID','std_name':'Name','std_mail':'EMail-ID','std_phone':'Phone number'}
-        error_messages={'std_id':{'required':'ID is a mandatory field'},
-                        'std_name':{'required':'Name is a mandatory field'},
-                        'std_mail':{'required':'E-mail is a mandatory field'},
-                        'std_phone':{'required':'phone no. is a mandatory field'},
+        fields = '__all__'
+        exclude = ['link']
+        labels = {'uid':'ID',
+                  'name':'Name',
+                  'mail':'EMail-ID',
+                  'phone':'Phone number',
+                  'gender':'Gender',
+                  'add1':'Address1',
+                  'add2':'Address2',
+                  'hobby1':'Reading Boooks',
+                  'hobby2':'Travelling',
+                  'hobby3':'Listening Music',
+                  'hobby4':'Coding',
+                  'hobby5':'Sports',
+                  'city':'City'
+                  }
+        error_messages={'uid':{'required':'ID is a mandatory field'},
+                        'name':{'required':'Name is a mandatory field'},
+                        'mail':{'required':'E-mail is a mandatory field'},
+                        'phone':{'required':'phone no. is a mandatory field'},
+                        'add1':{'required':'Address is a mandatory field'},
+                        'city':{'required':'city is a mandatory field'},
+                        'gender':{'required':'gender is a mandatory field'},
                     }
-        widgets = {'std_id':forms.NumberInput(attrs={'placeholder':'Enter the ID'}),
-                    'std_name':forms.TextInput(attrs={'placeholder':'Enter the Name'}),
-                    'std_mail':forms.EmailInput(attrs={'placeholder':'Enter the Mail'}),
-                    'std_phone':forms.TextInput(attrs={'placeholder':'Enter the Phone no'}),
+        widgets = { 'uid':forms.NumberInput(attrs={'placeholder':'Enter the ID'}),
+                    'name':forms.TextInput(attrs={'placeholder':'Enter the Name'}),
+                    'mail':forms.EmailInput(attrs={'placeholder':'Enter the Mail'}),
+                    'phone':forms.TextInput(attrs={'placeholder':'Enter the Phone no'}),
+                    'city':forms.TextInput(attrs={'placeholder':'Enter the City'}),
+                    'add1':forms.TextInput(attrs={'placeholder':'Enter Address1'}),
+                    'add2':forms.TextInput(attrs={'placeholder':'Enter Address2'}),
                 }
-        
+
 # class std_register(forms.Form):
 #     std_phone_error_dict= {'required':'Phone no is mandatory field','max_length':'phone no is too long','min_length':'phone no is too short'}
 #     std_name_error_dict= {'required':'Name is mandatory field','max_length':'Name is too long','min_length':'Name is too short'}
