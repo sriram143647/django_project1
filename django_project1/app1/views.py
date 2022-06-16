@@ -30,7 +30,7 @@ def app1_proj_index(request):
     return render(request,'app1_proj_templates/index.html')
 
 def app1_proj_about(request):
-    return render(request,'app1_proj_templates/about.html')    
+    return render(request,'app1_proj_templates/about.html')
 
 def app1_proj_clients(request):
     return render(request,'app1_proj_templates/clients.html',)
@@ -44,29 +44,35 @@ def app1_proj_ourwork(request):
 def show_data(request,my_id=0):
     std_detail = student_data.objects.all()
     for std in std_detail:
-        hby_list = []
-        if std.hobby1 == True:
-            hby_list.append('Reading Books')
-        if std.hobby2 == True:
-            hby_list.append('Travelling')
-        if std.hobby3 == True:
-            hby_list.append('Listening Music')
-        if std.hobby4 == True:
-            hby_list.append('Coding')
-        if std.hobby5 == True:
-            hby_list.append('Sports')
         if std.uid == my_id:
+            hby_list = []
+            if std.hobby1 == True:
+                hby_list.append('Reading Books')
+            if std.hobby2 == True:
+                hby_list.append('Travelling')
+            if std.hobby3 == True:
+                hby_list.append('Listening Music')
+            if std.hobby4 == True:
+                hby_list.append('Coding')
+            if std.hobby5 == True:
+                hby_list.append('Sports')
+            while True:
+                if len(hby_list) < 3:
+                    hby_list.append('')
+                else:
+                    break
+        
             bio_details = {
-            'name':std.name,
-            'city':std.city,
-            'hobby1':hby_list[0],
-            'hobby2':hby_list[1],
-            'hobby3':hby_list[2],
-            'id':my_id,
-            'mail_id':std.mail,
-            'phone':std.phone,
-            }       
-            return render(request,'app2_templates/template_2.html',bio_details)
+                'name':std.name,
+                'city':std.city,
+                'hobby1':hby_list[0],
+                'hobby2':hby_list[1],
+                'hobby3':hby_list[2],
+                'id':my_id,
+                'mail_id':std.mail,
+                'phone':std.phone,
+                }
+            return render(request,'app2_templates/template_2.html',bio_details) 
 
 def student_detail(request):
     std_details = student_data.objects.all()

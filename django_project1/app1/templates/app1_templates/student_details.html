@@ -7,14 +7,20 @@
             th,td{
                 border: 1px black solid;
             }
+            .success{
+                background-color:yellow;
+                color:black;
+            }
         </style>
     </head>
     <body>
         <h1>Student Info</h1>
-        {% for msg in messages %}
-            {{msg}}
-        {% endfor %}
-        
+        {% if messages %}
+            {% for msg in messages %}
+                <span class='success'>{{msg}}</span>
+            {% endfor %}
+        {% endif %}
+
         {% if stud_details %}
         <table>
             <tr>
