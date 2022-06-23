@@ -21,7 +21,8 @@ urlpatterns = [
     path('signup/',views.sign_up,name='signup'),
     path('login/',views.user_login),
     path('logout/',views.user_logout,name='logout'),
-    path('profile/',views.user_profile),
+    path('profile/',views.user_profile,name='profile'),
     path('changepass/',views.user_change_pass,name='change_pass'),
     path('setpass/',views.user_set_pass,name='set_pass'),
+    path('userdetail/<int:id>',views.user_detail,name='usrdetail'),
 ]

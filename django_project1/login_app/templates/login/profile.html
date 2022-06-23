@@ -3,21 +3,55 @@
     <head>
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <title>Student Profile</title>
+        <style>
+            td{ 
+                border: 0px black solid;
+            }
+            .err{
+                color:red;
+            }
+        </style>
     </head>
     <body>
         <h1>Welcome {{name}}</h1>
         <br/>
         <br/>
-        {% if messages %}
-            {% for msg in messages %}
-                <span>{{msg}}</span>
+        {% if users != None %}
+            <h3>List Of Users</h3>
+            {% for usr in users  %}
+                <a href='{% url 'usrdetail' usr.id %}'>{{usr.username}}</a><br/><br/>
             {% endfor %}
         {% endif %}
-        <br/>
-        <a href="{% url 'logout' %}">Log Out</a>
-        <br/>
-        <a href="{% url 'change_pass' %}">Change password</a>
-        <br/>
-        <a href="{% url 'set_pass' %}">set new password</a>
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+            {% if user.non_field_errors %}
+                {% for error in user.non_field_errors %}
+                    <p class='err'> {{ error }} </p>
+                {% endfor %}
+            {% endif %}
+            <table>
+                {% for field in user.visible_fields %}
+                    <tr> 
+                        <td>{{field.label_tag}} </td>
+                        <td>{{field}} {{field.errors|striptags}}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td><input type="submit" value="Save"><td>
+                </tr>
+                <tr>
+                    <td><a href="{% url 'logout' %}">Log Out</a></td>
+                    <td>
+                        <a href="{% url 'change_pass' %}">Change password</a>&nbsp;&nbsp;&nbsp;
+                        <a href="{% url 'set_pass' %}">set new password</a>                    
+                    </td>
+                </tr>
+            </table>
+            {% if messages %}
+                {% for msg in messages %}
+                <span class='success'>{{msg}}</span>
+                {% endfor %}
+            {% endif %}
+        </form>
     </body>
 </html>

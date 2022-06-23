@@ -1,23 +1,32 @@
 from requests import request
-from django import forms
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect as redirect
 from django.contrib import messages
-from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm,UserCreationForm,PasswordChangeForm,SetPasswordForm
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm
+from login_app.forms import signup_form,edit_user_profile,edit_admin_profile
 
-# Create your views here.
-class signup_form(UserCreationForm):
-    password2 = forms.CharField(label='Re-enter Password',widget=forms.PasswordInput)
-    class Meta:
-        model = User
-        fields = ['username','first_name','last_name','email']
-        labels = {'email':'E-mail'}
-        
+# Create your views here.       
 def user_profile(request):
     if request.user.is_authenticated:
-        return render(request,'login/profile.html',{'name':request.user})
+        if request.method == 'POST':
+            if request.user.is_superuser == True:
+                user_fm = edit_admin_profile(request.POST,instance=request.user)
+                users = User.objects.all()
+            else:
+                user_fm = edit_user_profile(request.POST,instance=request.user)
+            if user_fm.is_valid():
+                messages.success(request,'Profile updated successfully')
+                user_fm.save()
+                return redirect('/loginapp/profile/')
+        else:
+            if request.user.is_superuser == True:
+                user_fm = edit_admin_profile(instance=request.user)
+                users = User.objects.all()
+            else:
+                user_fm = edit_user_profile(instance=request.user)
+        return render(request,'login/profile.html',{'name':request.user,'user':user_fm,'users':users})
     else:
         return redirect('/loginapp/login/')
 
@@ -93,3 +102,11 @@ def sign_up(request):
     else:
         user = signup_form()
     return render(request,'login/sign_up.html',{'user':user})
+
+def user_detail(request,id):
+    if request.user.is_authenticated:
+        user = User.objects.get(pk=id)
+        user_fm = edit_user_profile(instance=user)
+        return render(request,'login/user_detail.html',{'user':user_fm})
+    else:
+        return redirect('/loginapp/profile/')
