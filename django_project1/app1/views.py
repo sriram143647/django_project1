@@ -61,7 +61,6 @@ def show_data(request,my_id=0):
                     hby_list.append('')
                 else:
                     break
-        
             bio_details = {
                 'name':std.name,
                 'city':std.city,
@@ -72,7 +71,7 @@ def show_data(request,my_id=0):
                 'mail_id':std.mail,
                 'phone':std.phone,
                 }
-            return render(request,'app2_templates/template_2.html',bio_details) 
+            return render(request,'app2_templates/template_2.html',bio_details)
 
 def student_detail(request):
     std_details = student_data.objects.all()

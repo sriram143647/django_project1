@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Student Profile</title>
+    </head>
+    <body>
+        <h1>Welcome {{name}}</h1>
+        <br/>
+        <br/>
+        {% if messages %}
+            {% for msg in messages %}
+                <span>{{msg}}</span>
+            {% endfor %}
+        {% endif %}
+        <a href="{% url 'logout' %}">Log Out</a>
+    </body>
+</html>

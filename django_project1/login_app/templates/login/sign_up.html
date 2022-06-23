@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Student sign up Form</title>
+        <style>
+            th,td {border: 0px black solid;}
+            .errorlist:after {
+                list-style-type: None;
+                color:red;
+            }
+            .success{
+                color:red;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Student Sign Up</h1>
+        <form action='' method='POST' novalidate>
+            {% csrf_token %}
+            <table>
+                {% for field in user.visible_fields %}
+                    <tr> 
+                        <td>{{field.label_tag}} </td>
+                        <td>{{field}} {{field.errors|striptags}}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br/>
+            <input type="submit" value="signup">
+        </form>
+        {% if messages %}
+            {% for msg in messages %}
+                <small {% if msg.tags %} class={{msg.tags}} {% endif %}>
+                    {{msg}} </small>
+                </small>
+            {% endfor %}
+        {% endif %}
+    </body>
+</html>
