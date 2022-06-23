@@ -22,4 +22,6 @@ urlpatterns = [
     path('login/',views.user_login),
     path('logout/',views.user_logout,name='logout'),
     path('profile/',views.user_profile),
+    path('changepass/',views.user_change_pass,name='change_pass'),
+    path('setpass/',views.user_set_pass,name='set_pass'),
 ]

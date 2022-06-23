@@ -13,6 +13,11 @@
                 <span>{{msg}}</span>
             {% endfor %}
         {% endif %}
+        <br/>
         <a href="{% url 'logout' %}">Log Out</a>
+        <br/>
+        <a href="{% url 'change_pass' %}">Change password</a>
+        <br/>
+        <a href="{% url 'set_pass' %}">set new password</a>
     </body>
 </html>
