@@ -1,13 +1,15 @@
-from requests import request
+from django.http import HttpRequest as request
+from django.http import HttpResponse as response
+from django.http import HttpResponseRedirect as redirect
 from django.shortcuts import render
-from django.shortcuts import HttpResponseRedirect as redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm,SetPasswordForm
+from django.utils.functional import SimpleLazyObject
 from login_app.forms import signup_form,edit_user_profile,edit_admin_profile
 
-# Create your views here.       
+# Create your views here.
 def user_profile(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -26,6 +28,7 @@ def user_profile(request):
                 users = User.objects.all()
             else:
                 user_fm = edit_user_profile(instance=request.user)
+                users = None
         return render(request,'login/profile.html',{'name':request.user,'user':user_fm,'users':users})
     else:
         return redirect('/loginapp/login/')
@@ -71,8 +74,9 @@ def user_set_pass(request):
 def user_login(request):
     if request.method == 'GET':
         if request.user.is_authenticated:
-            return redirect('/loginapp/profile/')
-    
+            if not isinstance(request.user,SimpleLazyObject):
+                return redirect('/loginapp/profile/')
+
     if request.method == 'POST':
         if User.objects.filter(username=request.POST['username']).exists():
             auth = AuthenticationForm(request=request, data=request.POST,auto_id=True,label_suffix='')
@@ -82,15 +86,16 @@ def user_login(request):
                 auth_user = authenticate(request,username=user_name,password=user_pass)
                 if auth_user is not None:
                     login(request,auth_user)
-                    messages.success(request,'Logged in successfully !!')
+                    messages.success(request,'Logged in successfully!!')
                     return redirect('/loginapp/profile/')
         else:
             messages.success(request,"User doesn't exists, Please signup")
             auth = AuthenticationForm(auto_id=True,label_suffix='')
-            return render(request,'login/login.html',{'user':auth})    
+            return render(request,'login/login.html',{'user':auth})
     else:
         auth = AuthenticationForm(auto_id=True,label_suffix='')
-        return render(request,'login/login.html',{'user':auth})    
+        return render(request,'login/login.html',{'user':auth})
+    return render(request,'login/login.html',{'user':auth})
 
 def sign_up(request):
     if request.method == 'POST':
