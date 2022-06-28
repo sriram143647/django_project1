@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'app2',
     'app3',
     'crud_app',
-    'login_app'
+    'login_app',
+    'mini_blog',
 ]
 
 MIDDLEWARE = [

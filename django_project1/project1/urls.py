@@ -25,6 +25,7 @@ urlpatterns = [
     path('app3/',include('app3.urls')),
     path('crud/',include('crud_app.urls')),
     path('loginapp/',include('login_app.urls')),
+    path('miniblog/',include('mini_blog.urls')),
     path('proj/index/',views.index),
     path('proj/team/',views.team),
     path('proj/portfolio/',views.portfolio),
