@@ -29,7 +29,7 @@ def user_profile(request):
             else:
                 user_fm = edit_user_profile(instance=request.user)
                 users = None
-        return render(request,'login/profile.html',{'name':request.user,'user':user_fm,'users':users})
+        return render(request,'blog/profile.html',{'name':request.user,'user':user_fm,'users':users})
     else:
         return redirect('/loginapp/login/')
 

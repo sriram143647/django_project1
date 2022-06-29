@@ -19,14 +19,12 @@ from mini_blog import views
 
 urlpatterns = [
     path('signup/',views.sign_up,name='signup'),
-    path('login/',views.user_login),
+    path('login/',views.user_login,name='login'),
     path('logout/',views.user_logout,name='logout'),
     path('profile/',views.user_profile,name='profile'),
     path('index/',views.blog_index,name='index'),
     path('about/',views.blog_about,name='about'),
-    path('clients/',views.blog_clients,name='clients'),
     path('contact/',views.blog_contact,name='contact'),
-    path('ourwork/',views.blog_ourwork,name='work'),
     path('changepass/',views.user_change_pass,name='change_pass'),
     path('userdetail/<int:id>',views.user_detail,name='usrdetail'),
     

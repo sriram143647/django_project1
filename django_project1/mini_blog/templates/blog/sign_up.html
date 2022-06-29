@@ -10,20 +10,30 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>blueneek</title>
+      <title>Sign Up Form</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
+      <style>
+        th,td {border: 0px black solid;}
+        .errorlist:after {
+            list-style-type: None;
+            color:red;
+        }
+        .success{
+            color:green;
+        }
+      </style>
       <!-- bootstrap css -->
-      <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css'%}">
       <!-- style css -->
-      <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/style.css'%}">
       <!-- Responsive-->
-      <link rel="stylesheet" href="{% static 'blog/css/responsive.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/responsive.css'%}">
       <!-- fevicon -->
       <link rel="icon" href="{% static 'blog/images/fevicon.png' %}" type="image/gif" />
       <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.min.css' %}">
+      <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.min.css'%}">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
@@ -32,7 +42,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
    </head>
    <!-- body -->
-   <body class="main-layout margin_to90">
+   <body class="main-layout">
       <!-- loader  -->
       <div class="loader_bg">
          <div class="loader"><img src="{% static 'blog/images/loading.gif' %}" alt="#" /></div>
@@ -63,18 +73,17 @@
                               <ul class="navbar-nav mr-auto">
                                  <li class="nav-item active">
                                     <a class="nav-link" href="{%url 'about' %}">About Us</a>
-                                 </li> 
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="{%url 'clients' %}">Our Clients</a>
-                                 </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="{%url 'work' %}">Our Work</a>
                                  </li>
                                  <li class="nav-item">
                                     <a class="nav-link" href="{%url 'contact' %}">Contact Us</a>
                                  </li>
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="{%url 'signup' %}">Sign Up</a>
+                                 </li> 
+                                 <li class="nav-item">
+                                    <a class="nav-link" href="{%url 'login' %}">Login</a>
+                                 </li>
                               </ul>
-                              <div class="sign_btn"><a href="#">Get A Quote</a></div>
                            </div>
                         </nav>
                      </div>
@@ -85,77 +94,42 @@
       </header>
       <!-- end header inner -->
       <!-- end header -->
-     
-      <!-- clients -->
-      <div class="clients">
+      
+      <!--  contact -->
+      <div id="contact" class="contact">
          <div class="container">
             <div class="row">
-               <div class="col-md-6 offset-md-3">
-                  <div class="titlepage">
-                     <h2>What is Say clients</h2>
-                     <span></span>
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="clients_box">
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-                  </div>
-                  <div class="jonu">
-                     <img src="{% static 'blog/images/cross_img.png' %}" alt="#"/>
-                     <h3>Jone due</h3>
-                     <strong>(sure there isn't)</strong>
-                     <a class="read_more" href="#">Get A Quote</a>
-                  </div>
+                <div class="col-md-12">
+                    <div class="titlepage">
+                        <h2>Member ship Sign Up</h2>
+                    </div>
+                </div>
+                <div class="col-md-6 offset-md-3">
+                <form action='' method='POST' class="main_form" novalidate>
+                    {% csrf_token %}
+                    <table>
+                        {% for field in user.visible_fields %}
+                            <tr class='row'>
+                                <td class="cont">{{field.label_tag}} </td>
+                                <td class="form-control">{{field}} {{field.errors|striptags}} </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <br/>
+                    <input class="submit" type="submit" value="signup">
+                </form>
+                {% if messages %}
+                    {% for msg in messages %}
+                        <small {% if msg.tags %} class={{msg.tags}} {% endif %}>
+                            {{msg}} </small>
+                        </small>
+                    {% endfor %}
+                {% endif %}
                </div>
             </div>
          </div>
       </div>
-      <!-- end clients -->
-     
-      <!--  footer -->
-      <footer>
-         <div class="footer">
-            <div class="container">
-               <div class="row border-top">
-                  <div class="col-md-6 padding_bottom1   ">
-                     <h3>Subscribe Now</h3>
-                     <form class="footer_form">
-                        <input class="enter" placeholder="Enter your email" type="type" name="Enter your email">
-                        <button class="submit">submit</button>
-                     </form>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="row">
-                        <div class="col-md-5 offset-md-1 padding_bottom1">
-                           <h3>Links</h3>
-                           <ul class="cont">
-                              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </li>
-                           </ul>
-                        </div>
-                        <div class="col-md-5 offset-md-1">
-                           <h3>Contact us</h3>
-                           <ul class="cont">
-                              <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do </li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="copyright">
-               <div class="container">
-                  <div class="row">
-                     <div class="col-md-12">
-                        <p>© 2019 All Rights Reserved. <a href="https://html.design/"> Free Html Templates</a></p>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer>
-      <!-- end footer -->
+      <!-- end contact -->
       <!-- Javascript files-->
       <script src="{% static 'blog/js/jquery.min.js' %}"></script>
       <script src="{% static 'blog/js/popper.min.js' %}"></script>
