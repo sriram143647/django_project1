@@ -14,12 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.db import router
 from django.urls import path,include
+from customteam import views as team_view
+from customtask import views as task_view
 from django.views.generic.base import TemplateView
+from rest_framework .routers import DefaultRouter
+
+router = DefaultRouter()
+
+router.register('team',team_view.TeamViewSet,basename='team')
+router.register('task',task_view.TaskViewSet,basename='task')
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="home.html"), name="home"),
     path("admin/", admin.site.urls),
+    path("",include(router.urls)),
     path("task/", include("customuser.urls")),
     path("task/", include("django.contrib.auth.urls")),
 ]
