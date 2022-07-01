@@ -39,12 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'customuser',
-    'customteam'
+    'customteam',
+    'customtask',
+    'rest_framework'
 ]
 
 AUTH_USER_MODEL = "customuser.CustomUser"
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+DATE_INPUT_FORMATS = ['%d-%m-%Y']
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

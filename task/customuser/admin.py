@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from customuser.forms import CustomUserCreationForm, CustomUserChangeForm
-from customuser.models import CustomUser
+from customteam.models import CustomUser,CustomTeam
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):

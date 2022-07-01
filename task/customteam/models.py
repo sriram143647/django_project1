@@ -10,3 +10,6 @@ class CustomTeam(models.Model):
     
     def __str__(self):
         return self.team_name
+    
+    def members(self):
+        return ",".join([str(m) for m in self.team_members.all()])
