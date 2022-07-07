@@ -51,6 +51,7 @@ GROUP_TEAM_LEAD = "lead"
 GROUP_TEAM_MEMEBER = "member"
 
 AUTH_USER_MODEL = "user.CustomUser"
+DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
 
 MIDDLEWARE = [

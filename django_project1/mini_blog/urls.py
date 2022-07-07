@@ -25,7 +25,9 @@ urlpatterns = [
     path('index/',views.blog_index,name='index'),
     path('about/',views.blog_about,name='about'),
     path('contact/',views.blog_contact,name='contact'),
+    path('addpost/',views.add_post,name='addpost'),
+    path('updatepost/<int:id>',views.update_post,name='updatepost'),
+    path('dashboard/',views.blog_dashboard,name='dashboard'),
     path('changepass/',views.user_change_pass,name='change_pass'),
     path('userdetail/<int:id>',views.user_detail,name='usrdetail'),
-    
 ]

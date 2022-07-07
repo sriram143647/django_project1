@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm,UsernameField
+from django.utils.translation import gettext,gettext_lazy as _
+from mini_blog.models import post
 
 class signup_form(UserCreationForm):
     password2 = forms.CharField(label='Re-enter Password',widget=forms.PasswordInput(attrs={'placeholder':'Enter the password Again'}))
@@ -23,6 +25,10 @@ class signup_form(UserCreationForm):
     add2 = forms.CharField(label='Address 2',max_length=50,widget=forms.TextInput(attrs={'placeholder':'Enter the Address2'}))
     city = forms.CharField(label='City',max_length=10,widget=forms.TextInput(attrs={'placeholder':'Enter the City'}))
 
+class loginform(AuthenticationForm):
+    username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True,'class':'form-control'}))
+    password = forms.CharField(label=_('password'),strip=False,widget=forms.PasswordInput(attrs={'autocomplete':'current-password','class':'form-control'}))
+
 class edit_user_profile(UserChangeForm):
     password = None
     class Meta:
@@ -36,3 +42,20 @@ class edit_admin_profile(UserChangeForm):
         model = User
         fields = '__all__'
         labels = {'email':'E-mail'} 
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = post
+        fields = '__all__'
+        labels = {
+            'title':'Title',
+            'desc':'Description',
+            'content':'Content',
+            'author':'Author',
+        }
+        widgets = {
+            'title':forms.Textarea(attrs={'placeholder':'Enter the Title','cols':'150','rows':'1'}),
+            'desc':forms.Textarea(attrs={'placeholder':'Enter the Description','cols':'150','rows':'3'}),
+            'content':forms.Textarea(attrs={'placeholder':'Enter the Content','cols':'150','rows':'8'}),
+        }
+        

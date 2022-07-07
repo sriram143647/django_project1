@@ -10,30 +10,20 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Member Login</title>
+      <title>blueneek</title>
       <meta name="keywords" content="">
       <meta name="description" content="">
       <meta name="author" content="">
-      <style>
-        th,td {border: 0px black solid;}
-        .errorlist:after {
-            list-style-type: None;
-            color:red;
-        }
-        .success{
-            color:green;
-        }
-      </style>
       <!-- bootstrap css -->
-      <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css'%}">
+      <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}">
       <!-- style css -->
-      <link rel="stylesheet" href="{% static 'blog/css/style.css'%}">
+      <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
       <!-- Responsive-->
-      <link rel="stylesheet" href="{% static 'blog/css/responsive.css'%}">
+      <link rel="stylesheet" href="{% static 'blog/css/responsive.css' %}">
       <!-- fevicon -->
       <link rel="icon" href="{% static 'blog/images/fevicon.png' %}" type="image/gif" />
       <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.min.css'%}">
+      <link rel="stylesheet" href="{% static 'blog/css/jquery.mCustomScrollbar.min.css' %}">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
@@ -77,12 +67,18 @@
                                  <li class="nav-item">
                                     <a class="nav-link" href="{%url 'contact' %}">Contact Us</a>
                                  </li>
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="{%url 'signup' %}">Sign Up</a>
-                                 </li> 
-                                 <li class="nav-item">
-                                    <a class="nav-link" href="{%url 'login' %}">Login</a>
-                                 </li>
+                                 {% if not request.user.is_authenticated %}
+                                    <li class="nav-item">
+                                       <a class="nav-link" href="{%url 'signup' %}">Sign Up</a>
+                                    </li> 
+                                    <li class="nav-item">
+                                       <a class="nav-link" href="{%url 'login' %}">Login</a>
+                                    </li>
+                                 {% else %}
+                                    <li class="nav-item">
+                                       <a class="nav-link" href="{%url 'logout' %}">Log out</a>
+                                    </li>
+                                 {% endif %}
                               </ul>
                            </div>
                         </nav>
@@ -94,42 +90,62 @@
       </header>
       <!-- end header inner -->
       <!-- end header -->
-      
-      <!--  contact -->
-      <div id="contact" class="contact">
+    
+      <!-- about -->
+      <div id="about"  class="about">
          <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="titlepage">
-                        <h2>Member Login</h2>
-                    </div>
-                </div>
-               <div class="col-md-6 offset-md-3">
-                    <form action='' method='POST' novalidate>
-                        {% csrf_token %}
-                        {% if user.non_field_errors %}
-                            {% for error in user.non_field_errors %}
-                                <p class='err'> {{ error }} </p>
-                            {% endfor %}
-                        {% endif %}
-                        <table>
-                            {% for field in user.visible_fields %}
-                            <tr class='row'>
-                              <td class="cont">{{field.label_tag}} </td>
-                              <td class="form-control">{{field}} {{field.errors|striptags}} </td>
+            <div class="row d_flex">
+               <div class="col-md-7">
+                  <div class="titlepage">
+                     <h2>Welcome {{name}}</h2>
+                     <span></span>
+                     {% comment %} <a class="submit text-center col px-md-3" href="{% url 'logout' %}">Log Out</a> {% endcomment %}
+                     {% if messages %}
+                        {% for msg in messages %}
+                           <span class='success'>{{msg}}</span>
+                        {% endfor %}
+                     {% endif %}
+                     <div style='width:200%'> 
+                        <h3 class='text-black my-3'>Dashboard</h3>
+                        <a href="{%url 'addpost' %}" class='btn btn-success'> Add post </a>
+                        <h4 class='text-center alert alert-info mt-3'>Your Posts</h4>
+                        {% if posts %}
+                        <table class='table table-bordered'>
+                           <thead>
+                           <tr class='text-center'>
+                              <th scope='col' style='width:5%'>ID</th>
+                              <th scope='col' style='width:20%'>Title</th>
+                              <th scope='col' style='width:60%'>Description</th>
+                              <th scope='col' style='width:15%'>Action</th>
                            </tr>
-                            {% endfor %}
-                            <tr class='row mx-md-n5'>
-                                 <td><input class="submit col px-md-3" type="submit" value="login"></td>
-                                 <td><a class="submit col px-md-3" href="{% url 'signup' %}">Sign Up</a></td>
-                            </tr>
+                           </thead>
+                           <tbody>
+                           {% for post in posts %}
+                              <tr>
+                                 <td>{{post.id}}</td>
+                                 <td>{{post.title}}</td>
+                                 <td>{{post.desc}}</td>
+                                 <td class='text-center'>
+                                    <a href="{% url 'updatepost' post.id%}" class='btn btn-warning btn-sm'>Edit</a>
+                                    <form action='' method='post' class='d-inline'>
+                                       {% csrf_token %}
+                                       <input type='submit' class='btn btn-danger btn-sm' value='Delete'>
+                                    </form>
+                                 </td>
+                              </tr>
+                           {% endfor %}
+                           </tbody>
                         </table>
-                    </form>
+                        {% else %}
+                           <h4 class='text-center alert alert-warning'>No Records</h4>
+                        {% endif %}
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
       </div>
-      <!-- end contact -->
+      <!-- end about -->
       <!-- Javascript files-->
       <script src="{% static 'blog/js/jquery.min.js' %}"></script>
       <script src="{% static 'blog/js/popper.min.js' %}"></script>

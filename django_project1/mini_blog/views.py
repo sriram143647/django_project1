@@ -5,9 +5,10 @@ from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
-from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.utils.functional import SimpleLazyObject
-from login_app.forms import signup_form,edit_user_profile,edit_admin_profile
+from mini_blog.forms import signup_form,edit_user_profile,edit_admin_profile,loginform, PostForm
+from mini_blog.models import post
 
 # Create your views here.
 def user_profile(request):
@@ -62,7 +63,7 @@ def user_login(request):
 
     if request.method == 'POST':
         if User.objects.filter(username=request.POST['username']).exists():
-            auth = AuthenticationForm(request=request, data=request.POST,auto_id=True,label_suffix='')
+            auth = loginform(request=request, data=request.POST,auto_id=True,label_suffix='')
             if auth.is_valid():
                 user_name = auth.cleaned_data['username']
                 user_pass = auth.cleaned_data['password']
@@ -70,13 +71,13 @@ def user_login(request):
                 if auth_user is not None:
                     login(request,auth_user)
                     messages.success(request,'Logged in successfully!!')
-                    return redirect('/miniblog/profile/')
+                    return redirect('/miniblog/dashboard/')
         else:
             messages.success(request,"User doesn't exists, Please signup")
-            auth = AuthenticationForm(auto_id=True,label_suffix='')
+            auth = loginform(auto_id=True,label_suffix='')
             return render(request,'blog/login.html',{'user':auth})
     else:
-        auth = AuthenticationForm(auto_id=True,label_suffix='')
+        auth = loginform(auto_id=True,label_suffix='')
         return render(request,'blog/login.html',{'user':auth})
     return render(request,'blog/login.html',{'user':auth})
 
@@ -99,6 +100,47 @@ def user_detail(request,id):
     else:
         return redirect('/miniblog/profile/')
 
+def add_post(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            post = PostForm(request.POST)
+            if post.is_valid():
+                post.save()
+                messages.success(request, f'New user is added successfully')
+                post = PostForm(auto_id=True,label_suffix='')
+                return render(request,'blog/addpost.html',{'form':post})
+        else:
+            post = PostForm(auto_id=True,label_suffix='')
+            return render(request,'blog/addpost.html',{'form':post})
+    else:
+        auth = loginform(auto_id=True,label_suffix='')
+        return render(request,'blog/login.html',{'user':auth})
+
+def add_post(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            post = PostForm(request.POST)
+            if post.is_valid():
+                post.save()
+                messages.success(request, f'New user is added successfully')
+                post = PostForm(auto_id=True,label_suffix='')
+                return render(request,'blog/addpost.html',{'form':post})
+        else:
+            post = PostForm(auto_id=True,label_suffix='')
+            return render(request,'blog/addpost.html',{'form':post})
+    else:
+        auth = loginform(auto_id=True,label_suffix='')
+        return render(request,'blog/login.html',{'user':auth})
+
+# def update_post(request,id):
+#     if request.user.is_authenticated:
+#         user_post = post.objects.get(id=id)
+#         return render(request,'blog/addpost.html',{'form':user_post})
+#     else:
+#         auth = loginform(auto_id=True,label_suffix='')
+#         return render(request,'blog/login.html',{'user':auth})
+
+    
 def blog_about(request):
     return render(request,'blog/about.html')
 
@@ -107,3 +149,11 @@ def blog_contact(request):
 
 def blog_index(request):
     return render(request,'blog/index.html')
+
+def blog_dashboard(request):
+    if request.user.is_authenticated:
+        posts = post.objects.all()
+        return render(request,'blog/blog_dashboard.html',{'name':request.user,'posts':posts})
+    else:
+        auth = loginform(auto_id=True,label_suffix='')
+        return render(request,'blog/login.html',{'user':auth})

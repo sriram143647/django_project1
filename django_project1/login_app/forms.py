@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm,UsernameField
+from django.utils.translation import gettext,gettext_lazy as _
 
 class signup_form(UserCreationForm):
     password2 = forms.CharField(label='Re-enter Password',widget=forms.PasswordInput(attrs={'placeholder':'Enter the password Again'}))
@@ -22,7 +23,6 @@ class signup_form(UserCreationForm):
     add1 = forms.CharField(label='Address 1',max_length=50,widget=forms.TextInput(attrs={'placeholder':'Enter the Address1'}))
     add2 = forms.CharField(label='Address 2',max_length=50,widget=forms.TextInput(attrs={'placeholder':'Enter the Address2'}))
     city = forms.CharField(label='City',max_length=10,widget=forms.TextInput(attrs={'placeholder':'Enter the City'}))
-
 class edit_user_profile(UserChangeForm):
     password = None
     class Meta:
@@ -35,4 +35,4 @@ class edit_admin_profile(UserChangeForm):
     class Meta:
         model = User
         fields = '__all__'
-        labels = {'email':'E-mail'} 
+        labels = {'email':'E-mail'}
