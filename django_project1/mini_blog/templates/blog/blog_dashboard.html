@@ -96,15 +96,14 @@
          <div class="container">
             <div class="row d_flex">
                <div class="col-md-7">
+                  {% if messages %}
+                     {% for msg in messages %}
+                        <span class='success'>{{msg}}</span>
+                     {% endfor %}
+                  {% endif %}
                   <div class="titlepage">
                      <h2>Welcome {{name}}</h2>
                      <span></span>
-                     {% comment %} <a class="submit text-center col px-md-3" href="{% url 'logout' %}">Log Out</a> {% endcomment %}
-                     {% if messages %}
-                        {% for msg in messages %}
-                           <span class='success'>{{msg}}</span>
-                        {% endfor %}
-                     {% endif %}
                      <div style='width:200%'> 
                         <h3 class='text-black my-3'>Dashboard</h3>
                         <a href="{%url 'addpost' %}" class='btn btn-success'> Add post </a>
@@ -126,11 +125,13 @@
                                  <td>{{post.title}}</td>
                                  <td>{{post.desc}}</td>
                                  <td class='text-center'>
-                                    <a href="{% url 'updatepost' post.id%}" class='btn btn-warning btn-sm'>Edit</a>
-                                    <form action='' method='post' class='d-inline'>
-                                       {% csrf_token %}
-                                       <input type='submit' class='btn btn-danger btn-sm' value='Delete'>
-                                    </form>
+                                    <a href="{% url 'updatepost' post.id %}" class='btn btn-warning btn-sm'>Edit</a>
+                                    {% if perms.blog.delete_post %}
+                                       <form action="{% url 'deletepost' post.id %}" method='post' class='d-inline'>
+                                          {% csrf_token %}
+                                          <input type='submit' class='btn btn-danger btn-sm' value='Delete'>
+                                       </form>
+                                    {% endif %}
                                  </td>
                               </tr>
                            {% endfor %}

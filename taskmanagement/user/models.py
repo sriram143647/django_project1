@@ -10,6 +10,3 @@ class CustomUser(auth_models.AbstractUser) :
 
     def __str__(self) -> str:
         return f"{self.id} {self.first_name}"
-
-
-

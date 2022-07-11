@@ -1,9 +1,5 @@
 from django.shortcuts import render
-
-
 # Create your views here.
-
-
 from rest_framework.viewsets import ModelViewSet
 from task.permissions import IsUserRole, UserAllowedUpdate
 
@@ -28,7 +24,6 @@ class TaskViewSet(ModelViewSet) :
             return [permission() for permission in [permissions.IsAuthenticated, UserAllowedUpdate]]
         elif self.action == "create" :
              return [permission() for permission in [permissions.IsAuthenticated, IsUserRole]]
-        
         return super().get_permissions()
 
 

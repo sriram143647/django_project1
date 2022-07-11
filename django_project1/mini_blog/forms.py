@@ -26,7 +26,7 @@ class signup_form(UserCreationForm):
     city = forms.CharField(label='City',max_length=10,widget=forms.TextInput(attrs={'placeholder':'Enter the City'}))
 
 class loginform(AuthenticationForm):
-    username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True,'class':'form-control'}))
+    username = UsernameField(widget=forms.TextInput(attrs={'autocomplete':'off','autofocus':True,'class':'form-control'}))
     password = forms.CharField(label=_('password'),strip=False,widget=forms.PasswordInput(attrs={'autocomplete':'current-password','class':'form-control'}))
 
 class edit_user_profile(UserChangeForm):

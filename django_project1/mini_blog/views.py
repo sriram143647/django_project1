@@ -3,7 +3,7 @@ from django.http import HttpResponse as response
 from django.http import HttpResponseRedirect as redirect
 from django.shortcuts import render
 from django.contrib import messages
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils.functional import SimpleLazyObject
@@ -70,7 +70,6 @@ def user_login(request):
                 auth_user = authenticate(request,username=user_name,password=user_pass)
                 if auth_user is not None:
                     login(request,auth_user)
-                    messages.success(request,'Logged in successfully!!')
                     return redirect('/miniblog/dashboard/')
         else:
             messages.success(request,"User doesn't exists, Please signup")
@@ -85,7 +84,9 @@ def sign_up(request):
     if request.method == 'POST':
         user = signup_form(request.POST)
         if user.is_valid():
-            user.save()
+            usr = user.save()
+            group = Group.objects.get(name='user')
+            usr.groups.add(group)
             messages.success(request, f'New user is added successfully')
             user = signup_form()
     else:
@@ -106,40 +107,41 @@ def add_post(request):
             post = PostForm(request.POST)
             if post.is_valid():
                 post.save()
-                messages.success(request, f'New user is added successfully')
+                messages.success(request, 'New post is added successfully')
                 post = PostForm(auto_id=True,label_suffix='')
-                return render(request,'blog/addpost.html',{'form':post})
+                return redirect('/miniblog/dashboard/')
         else:
             post = PostForm(auto_id=True,label_suffix='')
-            return render(request,'blog/addpost.html',{'form':post})
+        return render(request,'blog/addpost.html',{'form':post})
     else:
         auth = loginform(auto_id=True,label_suffix='')
         return render(request,'blog/login.html',{'user':auth})
 
-def add_post(request):
+def update_post(request,id):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            post = PostForm(request.POST)
-            if post.is_valid():
-                post.save()
-                messages.success(request, f'New user is added successfully')
-                post = PostForm(auto_id=True,label_suffix='')
-                return render(request,'blog/addpost.html',{'form':post})
+            user_post = post.objects.get(pk=id)
+            form = PostForm(request.POST,instance=user_post)
+            if form.is_valid():
+                form.save()
+                return redirect('/miniblog/dashboard/')
         else:
-            post = PostForm(auto_id=True,label_suffix='')
-            return render(request,'blog/addpost.html',{'form':post})
+            user_post = post.objects.get(pk=id)
+            form = PostForm(instance=user_post)
+            return render(request,'blog/addpost.html',{'form':form})
     else:
         auth = loginform(auto_id=True,label_suffix='')
         return render(request,'blog/login.html',{'user':auth})
 
-# def update_post(request,id):
-#     if request.user.is_authenticated:
-#         user_post = post.objects.get(id=id)
-#         return render(request,'blog/addpost.html',{'form':user_post})
-#     else:
-#         auth = loginform(auto_id=True,label_suffix='')
-#         return render(request,'blog/login.html',{'user':auth})
-
+def delete_post(request,id):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            del_post = post.objects.get(pk=id)
+            del_post.delete()
+            return redirect('/miniblog/dashboard/')
+    else:
+        auth = loginform(auto_id=True,label_suffix='')
+        return render(request,'blog/login.html',{'user':auth})
     
 def blog_about(request):
     return render(request,'blog/about.html')
@@ -153,7 +155,8 @@ def blog_index(request):
 def blog_dashboard(request):
     if request.user.is_authenticated:
         posts = post.objects.all()
-        return render(request,'blog/blog_dashboard.html',{'name':request.user,'posts':posts})
+        full_name = request.user.get_full_name()
+        return render(request,'blog/blog_dashboard.html',{'name':full_name,'posts':posts})
     else:
         auth = loginform(auto_id=True,label_suffix='')
         return render(request,'blog/login.html',{'user':auth})
