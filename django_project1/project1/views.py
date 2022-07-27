@@ -13,7 +13,7 @@ def home(request):
 def  get_session(request):
     name = request.session['name']
     if 'name' in request.session:
-        request.session.modified = True
+        # request.session.modified = True
         # print(request.session.keys())
         # print(request.session.items())
         # print(request.session.get_session_cookie_age())

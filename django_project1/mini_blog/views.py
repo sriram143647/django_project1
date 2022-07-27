@@ -156,7 +156,6 @@ def blog_contact(request):
 def blog_index(request):
     return render(request,'blog/index.html')
 
-@cache_page(180)
 def blog_dashboard(request):
     if request.user.is_authenticated:
         posts = post.objects.all()
