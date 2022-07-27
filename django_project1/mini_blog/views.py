@@ -7,9 +7,11 @@ from django.contrib.auth.models import User,Group
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils.functional import SimpleLazyObject
+from django.views.decorators.cache import cache_page
 from mini_blog.forms import signup_form,edit_user_profile,edit_admin_profile,loginform, PostForm
 from mini_blog.models import post
 
+# per-view caching is used in mini_blog
 # Create your views here.
 def user_profile(request):
     if request.user.is_authenticated:
@@ -142,16 +144,19 @@ def delete_post(request,id):
     else:
         auth = loginform(auto_id=True,label_suffix='')
         return render(request,'blog/login.html',{'user':auth})
-    
+
+@cache_page(180)    
 def blog_about(request):
     return render(request,'blog/about.html')
 
+@cache_page(180)
 def blog_contact(request):
     return render(request,'blog/contact.html')
 
 def blog_index(request):
     return render(request,'blog/index.html')
 
+@cache_page(180)
 def blog_dashboard(request):
     if request.user.is_authenticated:
         posts = post.objects.all()

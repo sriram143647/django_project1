@@ -46,12 +46,13 @@ INSTALLED_APPS = [
     'mini_blog',
 ]
 
+# uncomment the middlewarecache for per-site cacheing
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -134,7 +135,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SESSION_COOKIE_NAME = 'session_cookie'
 # SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 # SESSION_FILE_PATH = os.path.join(BASE_DIR,'session')
-CACHE_MIDDLEWARE_SECONDS = 300
+# CACHE_MIDDLEWARE_SECONDS = 300
 CACHES = {
     'default':{
         # database based cache
@@ -146,7 +147,9 @@ CACHES = {
         # local memory based cache
         # 'BACKEND':'django.core.cache.backends.locmem.LocMemCache',
         # 'LOCATION':'personal-cache',
-        'MAX_ENTRIES':'700',
-        'CULL_FREQUENCY':3
+        'OPTIONS':{
+            'MAX_ENTRIES':'700',
+            'CULL_FREQUENCY':3
+        }
     }
 }

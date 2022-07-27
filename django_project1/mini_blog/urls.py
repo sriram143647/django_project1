@@ -16,13 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from mini_blog import views
+from django.views.decorators.cache import cache_page
 
 urlpatterns = [
     path('signup/',views.sign_up,name='signup'),
     path('login/',views.user_login,name='login'),
     path('logout/',views.user_logout,name='logout'),
     path('profile/',views.user_profile,name='profile'),
-    path('index/',views.blog_index,name='index'),
+    # path('index/',views.blog_index,name='index'),
+    path('index/',cache_page(60)(views.blog_index),name='index'),
     path('about/',views.blog_about,name='about'),
     path('contact/',views.blog_contact,name='contact'),
     path('addpost/',views.add_post,name='addpost'),
