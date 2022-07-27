@@ -49,7 +49,9 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -121,7 +123,7 @@ TIME_ZONE = 'Asia/kolkata'
 
 USE_I18N = True
 USE_L10N = True
-USE_TZ = True
+USE_TZ = False
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -132,3 +134,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # SESSION_COOKIE_NAME = 'session_cookie'
 # SESSION_ENGINE = 'django.contrib.sessions.backends.file'
 # SESSION_FILE_PATH = os.path.join(BASE_DIR,'session')
+CACHE_MIDDLEWARE_SECONDS = 300
+CACHES = {
+    'default':{
+        # database based cache
+        'BACKEND':'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION':'personal_cache',
+        # file system based cache
+        # 'BACKEND':'django.core.cache.backends.filebased.FileBasedCache',
+        # 'LOCATION':'D:\sriram\django_project\django_project1',
+        # local memory based cache
+        # 'BACKEND':'django.core.cache.backends.locmem.LocMemCache',
+        # 'LOCATION':'personal-cache',
+        'MAX_ENTRIES':'700',
+        'CULL_FREQUENCY':3
+    }
+}
