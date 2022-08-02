@@ -1,4 +1,5 @@
 from django.contrib.auth.signals import user_logged_in,user_logged_out,user_login_failed
+from django.core.signals import request_finished,request_started,got_request_exception
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import *
@@ -101,5 +102,32 @@ def init_ending(sender,*args,**kwargs):
     print('---------------------------')
     print('Sender:',sender)
     print(f'args {args}')
+    print(f'kwargs {kwargs}')
+    print('---------------------------')
+    
+# request signals
+@receiver(request_started)
+def req_started(sender,environ,**kwargs):
+    print('requested started signal')
+    print('---------------------------')
+    print('Sender:',sender)
+    print('Enviroment:',environ)
+    print(f'kwargs {kwargs}')
+    print('---------------------------')
+    
+@receiver(request_finished)
+def req_ended(sender,**kwargs):
+    print('request ended signal')
+    print('---------------------------')
+    print('Sender:',sender)
+    print(f'kwargs {kwargs}')
+    print('---------------------------')
+    
+@receiver(got_request_exception)
+def req_expect(sender,request,**kwargs):
+    print('request exception signal waved')
+    print('---------------------------')
+    print('Sender:',sender)
+    print('request:',request)
     print(f'kwargs {kwargs}')
     print('---------------------------')
