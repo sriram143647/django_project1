@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'crud_app',
     'login_app',
     'mini_blog',
-    'cache_api'
+    'cache_api',
+    'signal_app'
 ]
 
 # uncomment the middlewarecache for per-site cacheing
