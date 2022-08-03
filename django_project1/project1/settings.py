@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'login_app',
     'mini_blog',
     'cache_api',
-    'signal_app'
+    'signal_app',
+    'custom_signal',
 ]
 
 # uncomment the middlewarecache for per-site cacheing

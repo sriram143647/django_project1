@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse as response
+from custom_signal import signals
 
 # Create your views here.
 def home(request):
     request.session['name']='sriram123'
     request.session.set_expiry(3600)
     res = render(request,'project_templates/home.html')
+    signals.notify.send(sender=None,request=request,user=['sriram','pooja'])
     # res.set_cookie(key='name',value='sriram',max_age=360,domain='http://127.0.0.1:8000/',secure=True,httponly=True,samesite='Strict')
     # res.set_signed_cookie(key='name',value='sriram',salt='abc@123',max_age=360,domain='http://127.0.0.1:8000/',secure=True,httponly=True,samesite='Strict')
     return res
