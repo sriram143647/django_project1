@@ -3,6 +3,7 @@ from django.core.signals import request_finished,request_started,got_request_exc
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import *
+from django.db.backends.signals import connection_created
 
 # login signals
 @receiver(user_logged_in,sender=User)
@@ -131,3 +132,45 @@ def req_expect(sender,request,**kwargs):
     print('request:',request)
     print(f'kwargs {kwargs}')
     print('---------------------------')
+    
+# management signals
+@receiver(pre_migrate)
+def before_migrations(sender,app_config,verbosity,interactive,using,plan,apps,**kwargs):
+    print('pre migrate signal waved')
+    print('---------------------------')
+    print('Sender:',sender)
+    print('App config:',app_config)
+    print('verbosity:',verbosity)
+    print('Interactive:',interactive)
+    print('Interactive:',interactive)
+    print('Using:',using)
+    print('Plan:',plan)
+    print('Apps:',apps)
+    print(f'kwargs {kwargs}')
+    print('---------------------------')
+    
+@receiver(post_migrate)
+def before_migrations(sender,app_config,verbosity,interactive,using,plan,apps,**kwargs):
+    print('pre migrate signal waved')
+    print('---------------------------')
+    print('Sender:',sender)
+    print('App config:',app_config)
+    print('verbosity:',verbosity)
+    print('Interactive:',interactive)
+    print('Interactive:',interactive)
+    print('Using:',using)
+    print('Plan:',plan)
+    print('Apps:',apps)
+    print(f'kwargs {kwargs}')
+    print('---------------------------')
+    
+# db signals
+@receiver(connection_created)
+def conn_db(sender,connection,**kwargs):
+    print('pre migrate signal waved')
+    print('---------------------------')
+    print('Sender:',sender)
+    print('Conn:',connection)
+    print(f'kwargs {kwargs}')
+    print('---------------------------')
+    
