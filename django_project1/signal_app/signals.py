@@ -4,12 +4,24 @@ from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import *
 from django.db.backends.signals import connection_created
+from django.core.cache import cache
+from importlib_metadata import version
 
 # login signals
 @receiver(user_logged_in,sender=User)
 def user_login(sender,request,user,**kwargs):
     print('user logged in successfully')
     print('---------------------------')
+    # get client ip
+    ip = request.META.get('REMOTE_ADDR')
+    request.session['ip'] = ip
+    print(ip)
+    
+    # login count
+    ct = cache.get('count',0,version=user.pk)
+    print(ct)
+    new_count = ct +1
+    cache.set('count',new_count,60*60*24, version=user.pk)    
     print('Sender:',sender)
     print('Request:',request)
     print('User:',user)
