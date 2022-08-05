@@ -162,7 +162,7 @@ def before_migrations(sender,app_config,verbosity,interactive,using,plan,apps,**
     print('---------------------------')
     
 @receiver(post_migrate)
-def before_migrations(sender,app_config,verbosity,interactive,using,plan,apps,**kwargs):
+def after_migrations(sender,app_config,verbosity,interactive,using,plan,apps,**kwargs):
     print('pre migrate signal waved')
     print('---------------------------')
     print('Sender:',sender)

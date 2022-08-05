@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     'login_app',
     'mini_blog',
     'cache_api',
-    'signal_app',
-    'custom_signal',
+    # 'signal_app',
+    # 'custom_signal',
+    'middleware_app',
 ]
 
 # uncomment the middlewarecache for per-site cacheing
@@ -60,6 +61,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'middleware_app.middleware.my_middleware1',
+    # 'middleware_app.middleware.my_middleware2',
+    # 'middleware_app.middleware.my_middleware3',
+    'middleware_app.middleware.middleware_hook',
 ]
 ROOT_URLCONF = 'project1.urls'
 
