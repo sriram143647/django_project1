@@ -65,7 +65,7 @@ MIDDLEWARE = [
     # 'middleware_app.middleware.my_middleware2',
     # 'middleware_app.middleware.my_middleware3',
     # 'middleware_app.middleware.middleware_hook',
-    'app3.middleware.site_down',
+    # 'app3.middleware.site_down',
 ]
 ROOT_URLCONF = 'project1.urls'
 
