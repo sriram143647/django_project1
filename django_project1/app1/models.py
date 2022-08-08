@@ -20,4 +20,4 @@ class student_data(models.Model):
     hobby5 = models.BooleanField('sports',default=False)
     
     def __str__(self):
-            return self.name
+        return self.name

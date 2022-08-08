@@ -124,8 +124,17 @@ def student_detail(request):
     
     # OR Operator
     # std_details = student_data.objects.filter(uid=114) | student_data.objects.filter(uid=107)
-    std_details = student_data.objects.filter(Q(uid=114) | Q(uid=107))
-    
+    # std_details = student_data.objects.filter(Q(uid=114) | Q(uid=107))
+
+    # The following methods does not return new queryset
+    # std_details = student_data.objects.get(uid=107)
+    # std_details = student_data.objects.first()
+    # std_details = student_data.objects.last()
+    # std_details = student_data.objects.latest('mail')
+    # std_details = student_data.objects.earliest('mail')
+    std_details = student_data.objects.order_by('name').first()
+    # print(student_data.objects.filter(uid=105).exists())
+  
     # query and result output
     print(f'sql query:{std_details.query}')
     return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
