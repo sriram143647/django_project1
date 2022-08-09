@@ -132,9 +132,62 @@ def student_detail(request):
     # std_details = student_data.objects.last()
     # std_details = student_data.objects.latest('mail')
     # std_details = student_data.objects.earliest('mail')
-    std_details = student_data.objects.order_by('name').first()
+    # std_details = student_data.objects.order_by('name').first()
     # print(student_data.objects.filter(uid=105).exists())
-  
+
+    # record create method 1
+    # s=student_data(uid='109',name='mayank',mail='mayank@gmail.com',gender='M',city='surat')
+    # s.save(force_insert=True)
+    
+    # record create method 2
+    # s = student_data.objects.create(uid='111',name='meena',mail='meena@gmail.com',gender='F',city='surat')
+    
+    # record create or get method
+    # std_details,created = student_data.objects.get_or_create(uid='112',name='leela',mail='leela@gmail.com', gender='F', city='surat')
+    
+    # # record update method (it is applicable on queryset)
+    # std_details = student_data.objects.filter(uid=112).update(phone='9966443322')
+    
+    # # record update or create method
+    # std_details,created = student_data.objects.update_or_create(id=15,name='leela',defaults={'mail':'leela@yahoo.com'})
+    
+    # # records bulks create
+    # std_objs = [
+    #     student_data(uid='113',name='karan',mail='karan@gmail.com',phone='9944558877',gender='M',city='surat'),
+    #     student_data(uid='114',name='riya',mail='riya@gmail.com',phone='9944223377',gender='F',city='surat'),
+    #     student_data(uid='115',name='mohit',mail='mohit@gmail.com',phone='7744558877',gender='M',city='surat')
+    # ]
+    # std_details = student_data.objects.bulk_create(std_objs)
+    
+    # # records bulks update
+    # std_data = student_data.objects.all()
+    # for st in std_data:
+    #     st.city = 'Rajkot'
+    # std_details = student_data.objects.bulk_update(std_data,['city'])
+    
+    # The in_bulk method gives object data in bulk based on id
+    # data = student_data.objects.in_bulk([5,8])
+    
+    # # retrun empty list
+    # data = student_data.objects.in_bulk()
+    
+    # # retrun full dataset
+    # data = student_data.objects.in_bulk()
+    # print(data)
+    
+    # # bulk delete
+    # std_details = student_data.objects.filter(name='saloni').delete()
+    
+    # # deelte all records
+    # std_details = student_data.objects.all().delete()
+    
+    # # count records
+    # dataset = student_data.objects.all()
+    # print(dataset.count())
+    
+    # print(std_details)
+    print('operation performed successfully')
     # query and result output
-    print(f'sql query:{std_details.query}')
+    # print(f'sql query:{std_details.query}')
+    std_details = ''
     return render(request,'app1_templates/student_details.html',{'stud_details':std_details})
