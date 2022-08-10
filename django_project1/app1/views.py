@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse as response
-from django.db.models import Q
+from django.db.models import Q,Avg,Sum,Max,Min,Count
 from app1.models import student_data
 
 # Create your views here. 
@@ -77,13 +77,18 @@ def show_data(request,my_id=0):
 def student_detail(request):
     # The following methods return new queryset
     # # retrieve data in objects 
-    # std_details = student_data.objects.all()
+    std_details = student_data.objects.all()
     # std_details = student_data.objects.filter(gender='M')
     # std_details = student_data.objects.exclude(gender='M')
     # std_details = student_data.objects.order_by('uid')
     # std_details = student_data.objects.order_by('-uid')[:5]
     # std_details = student_data.objects.order_by('?')
     # std_details = student_data.objects.order_by('uid').reverse()[:6]
+    
+    # # slicing
+    # std_details = student_data.objects.all()[:5]
+    # std_details = student_data.objects.all()[2:5]
+    # std_details = student_data.objects.all()[1:10:2]
     
     # # retrieve data in dictionary
     # std_details = student_data.objects.values()
@@ -125,6 +130,9 @@ def student_detail(request):
     # OR Operator
     # std_details = student_data.objects.filter(uid=114) | student_data.objects.filter(uid=107)
     # std_details = student_data.objects.filter(Q(uid=114) | Q(uid=107))
+    
+    # Not Operator
+    # std_details = student_data.objects.filter(~Q(uid=114))
 
     # The following methods does not return new queryset
     # std_details = student_data.objects.get(uid=107)
@@ -162,7 +170,7 @@ def student_detail(request):
     # # records bulks update
     # std_data = student_data.objects.all()
     # for st in std_data:
-    #     st.city = 'Rajkot'
+    #     st.city = 'Surat'
     # std_details = student_data.objects.bulk_update(std_data,['city'])
     
     # The in_bulk method gives object data in bulk based on id
@@ -185,9 +193,34 @@ def student_detail(request):
     # dataset = student_data.objects.all()
     # print(dataset.count())
     
-    # print(std_details)
+    # # vlookup operations
+    # # prefix i for case insensitive operations
+    # std_details = student_data.objects.filter(city__exact='Surat')
+    # std_details = student_data.objects.filter(city__iexact='surat')
+    # std_details = student_data.objects.filter(city__contains='Surat')
+    # std_details = student_data.objects.filter(city__icontains='surat')
+    # std_details = student_data.objects.filter(city__startswith='surat')
+    # std_details = student_data.objects.filter(city__istartswith='surat')
+    # std_details = student_data.objects.filter(city__endswith='surat')
+    # std_details = student_data.objects.filter(city__iendswith='surat')
+    # std_details = student_data.objects.filter(uid__in=[104,105,106])
+    # std_details = student_data.objects.filter(city__gt=100)
+    # std_details = student_data.objects.filter(city__gte=100)
+    # std_details = student_data.objects.filter(city__lt=100)
+    # std_details = student_data.objects.filter(city__lte=100)
+    # std_details = student_data.objects.filter(uid__range=(104,110)
+    # std_details = student_data.objects.filter(submit_date__date=(2022,10,12)
+    # std_details = student_data.objects.filter(submit_date__date__gt=(2022,10,12)
+    
+    # # aggerate fucntion
+    # avg = std_details.aggregate(Avg('marks'))
+    # sum = std_details.aggregate(Sum('marks'))
+    # max = std_details.aggregate(Max('marks'))
+    # min = std_details.aggregate(Min('marks'))
+    # count = std_details.aggregate(Count('marks'))
+    # {'stud_details':std_details,'average':avg}
     print('operation performed successfully')
     # query and result output
     # print(f'sql query:{std_details.query}')
-    std_details = ''
+    # std_details = ''
     return render(request,'app1_templates/student_details.html',{'stud_details':std_details})

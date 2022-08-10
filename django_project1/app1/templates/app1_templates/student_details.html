@@ -34,19 +34,19 @@
                 <th>City</th>
                 <th>Link</th>
             </tr>
-            {% comment %} {% for st in stud_details %} {% endcomment %}
+            {% for st in stud_details %}
             <tr>
-                <td>{{stud_details.uid}}</td>
-                <td>{{stud_details.name}}</td>
-                <td>{{stud_details.mail}}</td>
-                <td>{{stud_details.phone}}</td>
-                <td>{{stud_details.gender}}</td>
-                <td>{{stud_details.add1}}</td>
-                <td>{{stud_details.add2}}</td>
-                <td>{{stud_details.city}}</td>
-                <td><a href="{% url 'std_detail' stud_details.uid %}">view data</a></td>
+                <td>{{st.uid}}</td>
+                <td>{{st.name}}</td>
+                <td>{{st.mail}}</td>
+                <td>{{st.phone}}</td>
+                <td>{{st.gender}}</td>
+                <td>{{st.add1}}</td>
+                <td>{{st.add2}}</td>
+                <td>{{st.city}}</td>
+                <td><a href="{% url 'std_detail' st.uid %}">view data</a></td>
             </tr>
-            {% comment %} {% endfor %} {% endcomment %}
+            {% endfor %}
         </table>
         <br>
         <a href="/app2/register/">Register New Student</a>
