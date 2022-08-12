@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app4.models import father,mother,son,daughter
+from app4.models import father,mother,son,daughter,grandson
 
 # Register your models here.
 @admin.register(father)
@@ -12,8 +12,12 @@ class mother_admin_mode(admin.ModelAdmin):
 
 @admin.register(son)
 class son_admin_mode(admin.ModelAdmin):
-    list_display = ['first_name','middle_name','last_name','age','phone','school_addr']
+    list_display = ['first_name','middle_name','last_name','age','phone','salary']
     
 @admin.register(daughter)
 class daughter_admin_mode(admin.ModelAdmin):
+    list_display = ['first_name','middle_name','last_name','age','phone','school_addr']
+    
+@admin.register(grandson)
+class grandson_admin_mode(admin.ModelAdmin):
     list_display = ['first_name','middle_name','last_name','age','phone','school_addr']

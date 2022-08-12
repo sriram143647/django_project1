@@ -23,9 +23,16 @@ class mother(family_comm_fields):
     home_expenses = models.IntegerField(blank=True, validators=[MaxValueValidator(100000)])
 
 class son(family_comm_fields):
+    work_addr = models.CharField(max_length=50)
+    salary = models.IntegerField(blank=True, validators=[MaxValueValidator(1000000)])
+    
+class daughter(family_comm_fields):
     school_addr = models.CharField(max_length=50)
     pocket_money = models.IntegerField(blank=True, validators=[MaxValueValidator(5000)])
     
-class daughter(family_comm_fields):
+class daughter_in_law(family_comm_fields):
+    home_expenses = models.IntegerField(blank=True, validators=[MaxValueValidator(100000)])
+    
+class grandson(son):
     school_addr = models.CharField(max_length=50)
     pocket_money = models.IntegerField(blank=True, validators=[MaxValueValidator(5000)])
