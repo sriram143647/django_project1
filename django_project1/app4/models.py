@@ -36,3 +36,7 @@ class daughter_in_law(family_comm_fields):
 class grandson(son):
     school_addr = models.CharField(max_length=50)
     pocket_money = models.IntegerField(blank=True, validators=[MaxValueValidator(5000)])
+    
+class grandson1(grandson):
+    class Meta:
+        proxy = True
