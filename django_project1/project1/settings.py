@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'app1',
     'app2',
     'app3',
+    'app4',
     'crud_app',
     'login_app',
     'mini_blog',
@@ -67,6 +68,7 @@ MIDDLEWARE = [
     # 'middleware_app.middleware.middleware_hook',
     # 'app3.middleware.site_down',
 ]
+
 ROOT_URLCONF = 'project1.urls'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR,'templates')
