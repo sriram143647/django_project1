@@ -1,4 +1,5 @@
 from django.db import models
+from app1.managers import CustomManager
 
 
 # Create your models here.
@@ -18,6 +19,13 @@ class student_data(models.Model):
     hobby3 = models.BooleanField('listening_music',default=False)
     hobby4 = models.BooleanField('coding',default=False)
     hobby5 = models.BooleanField('sports',default=False)
+    
+    # built-in manager
+    objects = models.Manager()
+    
+    # custom manager
+    std_obj = CustomManager()
+    
     
     def __str__(self):
         return self.name

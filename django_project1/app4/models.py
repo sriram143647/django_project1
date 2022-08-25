@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator
 # Create your models here.
 class family_comm_fields(models.Model):
     first_name = models.CharField(max_length=15)
-    middle_name = models.CharField(max_length=15) 
+    middle_name = models.CharField(max_length=15)
     last_name = models.CharField(max_length=15)
     age = models.IntegerField(blank=True, validators=[MaxValueValidator(100)])
     dob = models.DateField()
