@@ -29,3 +29,9 @@ class student_data(models.Model):
     
     def __str__(self):
         return self.name
+    
+class proxy_student_data(student_data):
+    proxy_std_obj = CustomManager()
+    class Meta:
+        proxy = True
+        ordering = ['name']

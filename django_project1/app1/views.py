@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse as response
 from django.db.models import Q,Avg,Sum,Max,Min,Count
-from app1.models import student_data
+from app1.models import student_data,proxy_student_data
 
 # Create your views here. 
 def func1(request):
@@ -77,7 +77,13 @@ def show_data(request,my_id=0):
 def student_detail(request):
     # The following methods return new queryset
     # # retrieve data in objects 
+    
     std_details = student_data.std_obj.all()
+    
+    # # retriev data from proxy model using custom manager
+    # std_details = proxy_student_data.std_obj.all()
+    # std_details = proxy_student_data.proxy_std_obj.get_stu_roll_range(102,108)
+    
     # std_details = student_data.std_obj.filter(gender='M')
     # std_details = student_data.std_obj.exclude(gender='M')
     # std_details = student_data.std_obj.order_by('uid')
