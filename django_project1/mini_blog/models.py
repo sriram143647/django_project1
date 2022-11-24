@@ -12,3 +12,7 @@ class post(models.Model):
     author = models.OneToOneField(student_data, on_delete=models.CASCADE,primary_key=True)
     # author = models.OneToOneField(student_data, on_delete=models.PROTECT,primary_key=True)
     # author = models.OneToOneField(student_data, on_delete=models.CASCADE,primary_key=True, limit_choices_to={'is_staff':True})
+    
+class like(post):
+    post_like = author = models.OneToOneField(post, on_delete=models.CASCADE,primary_key=True,parent_link=True)
+    likes = models.IntegerField()

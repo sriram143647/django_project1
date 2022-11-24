@@ -1,1 +1,1 @@
-default_app_config = 'mini_blog.apps.MiniBlogConfig'
+# default_app_config = 'mini_blog.apps.MiniBlogConfig'
