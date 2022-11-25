@@ -23,10 +23,20 @@ class myviewchild(myview):
 class homeview(TemplateView):
     template_name = 'home.html'
     # template_name = ''
-    def get(self,request):
-        # template_name = 'home.html'
-        context = {'msg':'This message is printed to welcome you to site'}
-        return render(request,self.template_name, context)
+    
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        # context['fname'] = 'sriram'
+        # context['lname'] = 'kusuma'
+        # context['roll'] = 22
+        context = {'fname':'sriram','lname':'kusuma','roll':22}
+        return context
+        
+        
+    # def get(self,request):
+    #     # template_name = 'home.html'
+    #     context = {'msg':'This message is printed to welcome you to site'}
+    #     return render(request,self.template_name, context)
     
 #################################################################################################
 
