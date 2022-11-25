@@ -2,15 +2,13 @@ from django.shortcuts import render
 from django.http import HttpResponse as response
 from django.http import HttpResponseRedirect as redirect
 from django.views import View
+from django.views.generic.base import TemplateView
 from app2.forms import std_register
 from app1.models import student_data
 from django.contrib import messages
 
 ###########################################################################################
 # Create your views here.
-# def myview(request):
-#     return response('<h1>This is function based view</h1>')
-
 class myview(View):
     name= 'ram'
     def get(self,request):
@@ -22,9 +20,9 @@ class myviewchild(myview):
     
 ################################################################################################
 
-class homeview(View):
-    # template_name = 'home.html'
-    template_name = ''
+class homeview(TemplateView):
+    template_name = 'home.html'
+    # template_name = ''
     def get(self,request):
         # template_name = 'home.html'
         context = {'msg':'This message is printed to welcome you to site'}
@@ -53,3 +51,5 @@ class formview(View):
                 std_frm.save()
                 messages.success(request, f'New Record {ins_id} inserted successfully')
                 return redirect('/app2/view_data/')
+            
+#################################################################################################

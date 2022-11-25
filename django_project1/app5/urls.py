@@ -22,7 +22,7 @@ urlpatterns = [
     # path('clview/',views.myview.as_view(), name='clview'),
     # path('clview/',views.myview.as_view(name='sriram'), name='clview'),
     # path('subclview/',views.myviewchild.as_view(), name='subclview'),
-    path('homeview/',views.homeview.as_view(template_name = 'home.html'), name='homeview'),
+    path('homeview/',views.homeview.as_view(), name='homeview'),
     path('formview/',views.formview.as_view(), name='formview')
     
 ]
