@@ -26,10 +26,10 @@ class homeview(TemplateView):
     
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        # context['fname'] = 'sriram'
-        # context['lname'] = 'kusuma'
-        # context['roll'] = 22
-        context = {'fname':'sriram','lname':'kusuma','roll':22}
+        context['fname'] = 'sriram'
+        context['lname'] = 'kusuma'
+        context['roll'] = 22
+        # context = {'fname':'sriram','lname':'kusuma','roll':22}
         return context
         
         

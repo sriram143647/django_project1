@@ -22,7 +22,8 @@ urlpatterns = [
     # path('clview/',views.myview.as_view(), name='clview'),
     # path('clview/',views.myview.as_view(name='sriram'), name='clview'),
     # path('subclview/',views.myviewchild.as_view(), name='subclview'),
-    path('homeview/',views.homeview.as_view(), name='homeview'),
+    path('homeview/',views.homeview.as_view(extra_context= {'course':'python'}), name='homeview'),
+    path('homeview/<int:cl>',views.homeview.as_view(), name='cl_homeview'),
     path('formview/',views.formview.as_view(), name='formview')
     
 ]
