@@ -43,13 +43,14 @@ INSTALLED_APPS = [
     'app3',
     'app4',
     'app5',
-    'crud_app',
-    'login_app',
-    'mini_blog',
-    'cache_api',
+    # 'crud_app'
+    'crud_app2',
+    # 'login_app',
+    # 'mini_blog',
+    # 'cache_api',
     # 'signal_app',
     # 'custom_signal',
-    'middleware_app',
+    # 'middleware_app',
 ]
 
 # uncomment the middlewarecache for per-site cacheing

@@ -8,7 +8,7 @@
             "name": "Python: Django",
             "type": "python",
             "request": "launch",
-            "python":"C:\\Users\\011\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
+            "python":"C:\\Users\\admin\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
             "program": "${workspaceFolder}\\manage.py",
             "args": [
                 "runserver",

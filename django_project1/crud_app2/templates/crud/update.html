@@ -1,0 +1,22 @@
+{% extends 'crud/base.html' %}
+{% block content %}
+<div class="container">
+    <div clas='row'>
+        <div clas='col-sm-4'>
+            <h4 class='text-center alert alert-info'>Update Student Data</h4>
+            <form action="{% url 'updatedata' st.id %}" method='POST'>
+                {% csrf_token %}
+                <div class='container'>
+                    {% for field in std_form.visible_fields %}
+                        <label> {{field.label_tag}} </label> <br/>
+                        {{field}}<br/>
+                    {% endfor %}
+                    <br/>
+                    <input type='submit' class='btn btn-success' value='Update'>
+                    <a href="{% url 'addandshow' %}" class='btn btn-info'>Back To Home</a>
+                </div>
+            </form>       
+        </div>
+    </div>
+</div>
+{% endblock content%}
