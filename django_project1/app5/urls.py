@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.shortcuts import redirect
 from django.urls import path
 from app5 import views
 
@@ -24,6 +25,10 @@ urlpatterns = [
     # path('subclview/',views.myviewchild.as_view(), name='subclview'),
     path('homeview/',views.homeview.as_view(extra_context= {'course':'python'}), name='homeview'),
     path('homeview/<int:cl>',views.homeview.as_view(), name='cl_homeview'),
-    path('formview/',views.formview.as_view(), name='formview')
-    
+    path('formview/',views.formview.as_view(), name='formview'),
+    # redirect urls
+    # path('redirect_view/',views.RedirectView.as_view(url='/app5/homeview/'), name='red_homeview'),
+    # path('redirect_view/',views.redirect_view.as_view(), name='red_view')
+    # path('redirect_view/',views.RedirectView.as_view(pattern_name='formview), name='red_view')
+    path('redirect_view/',views.redirect_view.as_view(), name='red_view')
 ]

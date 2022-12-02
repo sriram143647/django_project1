@@ -1,5 +1,4 @@
 import re
-from attr import attrs
 from django.core import validators
 from django import forms
 from app1.models import student_data

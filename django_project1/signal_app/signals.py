@@ -5,7 +5,6 @@ from django.dispatch import receiver
 from django.db.models.signals import *
 from django.db.backends.signals import connection_created
 from django.core.cache import cache
-from importlib_metadata import version
 
 # # login signals
 # @receiver(user_logged_in,sender=User)
