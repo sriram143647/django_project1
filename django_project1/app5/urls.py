@@ -29,6 +29,6 @@ urlpatterns = [
     # redirect urls
     # path('redirect_view/',views.RedirectView.as_view(url='/app5/homeview/'), name='red_homeview'),
     # path('redirect_view/',views.redirect_view.as_view(), name='red_view')
-    # path('redirect_view/',views.RedirectView.as_view(pattern_name='formview), name='red_view')
-    path('redirect_view/',views.redirect_view.as_view(), name='red_view')
+    path('redirect_view/',views.RedirectView.as_view(pattern_name='formview'),name='red_view'),
+    # path('redirect_view/',views.redirect_view.as_view(), name='red_view')
 ]

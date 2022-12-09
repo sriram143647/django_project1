@@ -10,7 +10,7 @@ from crud_app2.models import student_detail
 
 # Create your views here.
 class add_std_data(TemplateView):
-    template_name = 'crud/add_show.html'
+    template_name = 'crud_app2/add_show.html'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         std_details = student_detail.objects.all()
@@ -45,8 +45,8 @@ class user_deleteview(RedirectView):
 class user_update_view(View):
     def get(self, request, id):
         std = student_detail.objects.get(pk=id)
-        std_frm = std_registration(instance=std)
-        return render(request,'crud/update.html',{'std_form':std_frm})
+        std_form = std_registration(instance=std)
+        return render(request,'crud_app2/update.html',{'std_form':std_form , 'id':id})
     
     def post(self,request, *args, **kwargs):
         del_id = kwargs['id']
