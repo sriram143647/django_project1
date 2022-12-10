@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'app3',
     'app4',
     'app5',
+    'genview_app',
     # 'crud_app'
     'crud_app2',
     # 'login_app',

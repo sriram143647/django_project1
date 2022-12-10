@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <style>
+            th,td{
+                border: 1px black solid;
+            }
+        </style>
+        <title>CRUD App</title>
+        <link rel="stylesheet" href="{% static 'crud/css/bootstrap.min.css' %}">
+    </head>
+    <body>
+        <br/>
+        <div class="container">
+            <div class='row'>
+                <div class='col-sm-12'>
+                    <h4 class='text-center alert alert-info'>Student Data</h4>
+                    {% if student_detail_list %}
+                    <table class='container table table-striped'>
+                        <tr>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Student Mail</th>
+                            <th>Student Phone</th>
+                        </tr>
+                        {% for st in student_detail_list %}
+                        <tr>
+                            <td>{{st.std_id}}</td>
+                            <td>{{st.std_name}}</td>
+                            <td>{{st.std_mail}}</td>
+                            <td>{{st.std_phone}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                    {% else %}
+                        <h4 class='container mt-5 alert alert-warning'>No Data Available</h3>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    <script src="{% static 'crud/js/jquery.js' %}"></script>
+    <script src="{% static 'crud/js/popper.js' %}"></script>
+    <script src="{% static 'crud/js/bootstrap.js' %}"></script>
+</body>
+</html>

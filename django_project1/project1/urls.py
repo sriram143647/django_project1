@@ -25,6 +25,7 @@ urlpatterns = [
     path('app3/',include('app3.urls')),
     path('app5/',include('app5.urls')),
     path('crud2/',include('crud_app2.urls')),
+    path('genview/',include('genview_app.urls')),
     # path('crud/',include('crud_app.urls')),
     # path('loginapp/',include('login_app.urls')),
     # path('miniblog/',include('mini_blog.urls')),
