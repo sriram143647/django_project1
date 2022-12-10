@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from genview_app.models import student_detail
 
 # Create your views here.
@@ -30,4 +31,17 @@ class std_listview(ListView):
     #     else:
     #         template_name = self.template_name
     #     return [template_name]
-        
+    
+class std_detail_view(DetailView):
+    # default settings
+    model = student_detail
+    
+    # custom settings
+    template_name = 'genview_app/student_details.html'
+    context_object_name = 'st'
+    pk_url_kwarg = 'id'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['all_stds'] = self.model.objects.all().order_by('std_name')
+        return context

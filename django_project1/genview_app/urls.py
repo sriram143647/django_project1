@@ -18,5 +18,7 @@ from django.urls import path
 from genview_app import views
 
 urlpatterns = [
-    path('std_detail/',views.std_listview.as_view(), name='std_detail'),
+    path('std_detail_list/',views.std_listview.as_view(), name='std_detail_list'),
+    # path('std_details/<int:pk>/',views.std_detail_view.as_view(), name='std_details'),
+    path('std_details/<int:id>/',views.std_detail_view.as_view(), name='std_details'),
 ]

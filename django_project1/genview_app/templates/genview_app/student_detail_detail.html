@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <style>
+            th,td{
+                border: 1px black solid;
+            }
+        </style>
+        <title>Generic View App</title>
+        <link rel="stylesheet" href="{% static 'crud/css/bootstrap.min.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <div clas='row'>
+                <div clas='col-sm-4'>
+                    <h4 class='text-center alert alert-info'>Student Data</h4>
+                    <div class='container'>
+                    <table border = 1>
+                        <tr>
+                            <td><label class='star'>Student ID:</label></td>
+                            <td>{{student_detail.std_id}}
+                        </tr>
+                        <tr>
+                            <td><label class='star'>Student Name:</label></td>
+                            <td>{{student_detail.std_name}}
+                        </tr>
+                        <tr>
+                            <td><label class='star'>Student Mail:</label></td>
+                            <td>{{student_detail.std_mail}}
+                        </tr>
+                        <tr>
+                            <td><label class='star'>Student Phone:</label></td>
+                            <td>{{student_detail.std_phone}}
+                        </tr>
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="{% static 'crud/js/jquery.js' %}"></script>
+        <script src="{% static 'crud/js/popper.js' %}"></script>
+        <script src="{% static 'crud/js/bootstrap.js' %}"></script>
+    </body>
+</html>

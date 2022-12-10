@@ -9,7 +9,7 @@
                 border: 1px black solid;
             }
         </style>
-        <title>CRUD App</title>
+        <title>Generic View App</title>
         <link rel="stylesheet" href="{% static 'crud/css/bootstrap.min.css' %}">
     </head>
     <body>
@@ -21,17 +21,11 @@
                     {% if std_data %}
                     <table class='container table table-striped'>
                         <tr>
-                            <th>Student ID</th>
                             <th>Student Name</th>
-                            <th>Student Mail</th>
-                            <th>Student Phone</th>
                         </tr>
                         {% for st in std_data %}
                         <tr>
-                            <td>{{st.std_id}}</td>
-                            <td>{{st.std_name}}</td>
-                            <td>{{st.std_mail}}</td>
-                            <td>{{st.std_phone}}</td>
+                            <td><a href="{% url 'std_details' st.id %}">{{st.std_name}}</a></td>
                         </tr>
                         {% endfor %}
                     </table>
