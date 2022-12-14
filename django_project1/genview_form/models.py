@@ -12,10 +12,8 @@ class student_detail(models.Model):
     # def get_absolute_url(self):
     #     return reverse("success")
     
-    def get_absolute_url(self):
-        return reverse("std_detail", kwargs={"pk": self.pk})
-    
-    
+    # def get_absolute_url(self):
+    #     return reverse("std_detail", kwargs={"pk": self.pk})
     
     def __str__(self):
         return self.std_name

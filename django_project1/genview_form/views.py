@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from genview_form.forms import std_registration
 from genview_form.models import student_detail
+from django import forms
 
 # Create your views here.
 class std_formview(FormView):
@@ -18,13 +19,19 @@ class std_formview(FormView):
     #     return super().form_valid(form)
 
 class std_createview(CreateView):
-    model = student_detail
-    fields = ("std_id","std_name","std_mail","std_phone")
+    # model = student_detail
+    # fields = ("std_id","std_name","std_mail","std_phone")
+    form_class = std_registration
     template_name = 'genview_form/std_form.html'
-    # success_url = '/genform/success/'
+    success_url = '/genform/success/'
+    
+    # def get_form(self):
+    #     form = super().get_form()
+    #     form.fields['password'].widget = forms.PasswordInput(attrs = {'class':'mypass'})
+    #     return form
 
 class success_templateview(TemplateView):
     template_name = 'genview_form/success.html'
     
-class student_detailview(DetailView):
-    model = student_detail
+# class student_detailview(DetailView):
+#     model = student_detail
