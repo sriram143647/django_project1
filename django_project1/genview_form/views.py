@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import FormView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView,UpdateView
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from genview_form.forms import std_registration
@@ -35,3 +35,12 @@ class success_templateview(TemplateView):
     
 # class student_detailview(DetailView):
 #     model = student_detail
+
+class std_updateview(UpdateView):
+    model = student_detail
+    fields = ("std_id","std_name","std_mail","std_phone")
+    template_name = 'genview_form/std_form.html'
+    success_url = '/genform/update_success/'
+    
+class update_success_templateview(TemplateView):
+    template_name = 'genview_form/update_success.html'
