@@ -44,8 +44,9 @@ INSTALLED_APPS = [
     'app4',
     'app5',
     'genview_app',
+    'genview_form',
     # 'crud_app'
-    'crud_app2',
+    # 'crud_app2',
     # 'login_app',
     # 'mini_blog',
     # 'cache_api',
