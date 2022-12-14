@@ -20,4 +20,6 @@ from genview_form import views
 urlpatterns = [
     path('std_form/',views.std_formview.as_view(), name='std_form'),
     path('success/',views.success_templateview.as_view(), name='success'),
+    path('std_create/',views.std_createview.as_view(), name='std_create'),
+    path('std_detail/<int:pk>',views.student_detailview.as_view(), name='std_detail'),
 ]
