@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'app5',
     'genview_app',
     'genview_form',
+    'auth_app',
     # 'crud_app'
     # 'crud_app2',
     # 'login_app',
