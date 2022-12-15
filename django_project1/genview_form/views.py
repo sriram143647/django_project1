@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.edit import FormView
-from django.views.generic.edit import CreateView,UpdateView
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from genview_form.forms import std_registration
@@ -44,3 +44,11 @@ class std_updateview(UpdateView):
     
 class update_success_templateview(TemplateView):
     template_name = 'genview_form/update_success.html'
+    
+class std_deleteview(DeleteView):
+    model = student_detail
+    success_url = '/genform/delete_success/'
+    template_name = 'genview_form/confirm_del.html'
+    
+class delete_success_templateview(TemplateView):
+    template_name = 'genview_form/delete_success.html'

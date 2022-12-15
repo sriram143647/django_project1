@@ -23,5 +23,7 @@ urlpatterns = [
     path('std_create/',views.std_createview.as_view(), name='std_create'),
     path('std_update/<int:pk>/',views.std_updateview.as_view(), name='std_update'),
     path('update_success/',views.update_success_templateview.as_view(), name='success'),
+    path('std_delete/<int:pk>/',views.std_deleteview.as_view(), name='std_delete'),
+    path('delete_success/',views.delete_success_templateview.as_view(), name='success'),
     # path('std_detail/<int:pk>',views.student_detailview.as_view(), name='std_detail'),
 ]

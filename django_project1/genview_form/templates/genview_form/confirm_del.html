@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <style>
+            th,td{
+                border: 1px black solid;
+            }
+        </style>
+        <title>Form View Test</title>
+        <link rel="stylesheet" href="{% static 'crud/css/bootstrap.min.css' %}">
+    </head>
+    <body>
+        <div class='container mt-5'>
+            <h2 class='text-center alert alert-danger'>Do You confirm to want to delete</h2>
+        </div>
+        <form action="" method='post'>
+            {% csrf_token %}
+            <input type="submit", value='Delete'>
+            <a href="{% url 'std_create' %}"> Back </a>
+        <script src="{% static 'crud/js/jquery.js' %}"></script>
+        <script src="{% static 'crud/js/popper.js' %}"></script>
+        <script src="{% static 'crud/js/bootstrap.js' %}"></script>
+    </body>
+</html>
