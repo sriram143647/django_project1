@@ -19,6 +19,6 @@ from django.urls import path
 from auth_app import views
 
 urlpatterns = [
-    path('profile/',views.get_profile,name='profile')
-
+    path('profile/',views.get_profile,name='profile'),
+    path('about/',views.get_about,name='about')
 ]
