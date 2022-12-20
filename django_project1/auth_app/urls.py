@@ -15,10 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.shortcuts import redirect
+from django.views.generic import TemplateView
+from django.contrib.auth.decorators import login_required
 from django.urls import path
-from auth_app import views
+# from auth_app import views
+from auth_app.views import profileview,aboutview
 
 urlpatterns = [
-    path('profile/',views.get_profile,name='profile'),
-    path('about/',views.get_about,name='about')
+    # path('profile/',views.get_profile,name='profile'),
+    # path('profile/',views.profileview.as_view(),name='profile'),
+    path('profile/',login_required(profileview.as_view()),name='profile'),
+    # path('about/',views.get_about,name='about')
+    path('about/',aboutview.as_view(),name='about')
 ]
