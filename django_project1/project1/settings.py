@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'app5',
     'genview_app',
     'genview_form',
-    'auth_app',
+    # 'auth_app',
+    'custom_auth_app',
     # 'crud_app'
     # 'crud_app2',
     # 'login_app',
@@ -169,3 +170,5 @@ CACHES = {
         }
     }
 }
+
+LOGIN_REDIRECT_URL = '/custom_auth/index/'

@@ -17,7 +17,7 @@ from django.utils.decorators import method_decorator
 class profileview(TemplateView):
     template_name = 'registration/profile.html'
     
-# @method_decorator(login_required,name='dispatch')
+# @method_decorator([login_required],name='dispatch')
 @method_decorator([login_required,staff_member_required],name='dispatch')
 class aboutview(TemplateView):
     template_name = 'registration/about.html'
